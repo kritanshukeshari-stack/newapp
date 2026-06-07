@@ -1,0 +1,474 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.root{background:#0f1117;padding:10%;font-family:'Segoe UI',system-ui,sans-serif}
+.pg-title{font-size:20px;font-weight:500;color:#38bdf8;margin-bottom:4px}
+.pg-sub{font-size:13px;color:#475569;margin-bottom:28px}
+.diagram-block{margin-bottom:40px}
+.dia-label{font-size:13px;font-weight:500;color:#94a3b8;margin-bottom:10px;letter-spacing:.3px;text-transform:uppercase}
+svg.dia{width:100%;display:block;border-radius:10px;background:#131720;border:0.5px solid #1e2535}
+</style>
+
+<div class="root">
+<p class="pg-title">Greedy patterns — visual diagrams</p>
+<p class="pg-sub">Div 3 + Div 4 — how each greedy strategy works, step by step</p>
+
+<!-- 1. Sorting + Pick largest K -->
+<div class="diagram-block">
+<p class="dia-label">1 · Sorting + pick largest K elements</p>
+<svg class="dia" viewBox="0 0 680 170" role="img">
+  <title>Sorting and pick largest K elements greedy diagram</title>
+  <desc>Array sorted ascending, last K elements picked and summed</desc>
+  <defs><marker id="a1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+  <!-- unsorted -->
+  <text fill="#475569" font-size="11" x="24" y="38">Unsorted</text>
+  <g>
+    <rect x="20" y="46" width="46" height="36" rx="6" fill="#1e2535" stroke="#334155" stroke-width="0.5"/>
+    <text fill="#94a3b8" font-size="13" text-anchor="middle" dominant-baseline="central" x="43" y="64">3</text>
+  </g>
+  <g><rect x="70" y="46" width="46" height="36" rx="6" fill="#1e2535" stroke="#334155" stroke-width="0.5"/>
+    <text fill="#94a3b8" font-size="13" text-anchor="middle" dominant-baseline="central" x="93" y="64">9</text></g>
+  <g><rect x="120" y="46" width="46" height="36" rx="6" fill="#1e2535" stroke="#334155" stroke-width="0.5"/>
+    <text fill="#94a3b8" font-size="13" text-anchor="middle" dominant-baseline="central" x="143" y="64">1</text></g>
+  <g><rect x="170" y="46" width="46" height="36" rx="6" fill="#1e2535" stroke="#334155" stroke-width="0.5"/>
+    <text fill="#94a3b8" font-size="13" text-anchor="middle" dominant-baseline="central" x="193" y="64">7</text></g>
+  <g><rect x="220" y="46" width="46" height="36" rx="6" fill="#1e2535" stroke="#334155" stroke-width="0.5"/>
+    <text fill="#94a3b8" font-size="13" text-anchor="middle" dominant-baseline="central" x="243" y="64">4</text></g>
+
+  <!-- arrow sort -->
+  <line x1="280" y1="64" x2="330" y2="64" stroke="#334155" stroke-width="1.5" marker-end="url(#a1)"/>
+  <text fill="#60a5fa" font-size="11" text-anchor="middle" x="305" y="56">sort</text>
+
+  <!-- sorted, last 3 highlighted (K=3) -->
+  <text fill="#475569" font-size="11" x="344" y="38">Sorted (pick last K=3)</text>
+  <g><rect x="340" y="46" width="46" height="36" rx="6" fill="#1e2535" stroke="#334155" stroke-width="0.5"/>
+    <text fill="#64748b" font-size="13" text-anchor="middle" dominant-baseline="central" x="363" y="64">1</text></g>
+  <g><rect x="390" y="46" width="46" height="36" rx="6" fill="#1e2535" stroke="#334155" stroke-width="0.5"/>
+    <text fill="#64748b" font-size="13" text-anchor="middle" dominant-baseline="central" x="413" y="64">3</text></g>
+  <!-- highlighted -->
+  <g><rect x="440" y="46" width="46" height="36" rx="6" fill="#0c2340" stroke="#0369a1" stroke-width="1"/>
+    <text fill="#38bdf8" font-size="13" font-weight="500" text-anchor="middle" dominant-baseline="central" x="463" y="64">7</text></g>
+  <g><rect x="490" y="46" width="46" height="36" rx="6" fill="#0c2340" stroke="#0369a1" stroke-width="1"/>
+    <text fill="#38bdf8" font-size="13" font-weight="500" text-anchor="middle" dominant-baseline="central" x="513" y="64">9</text></g>
+  <g><rect x="540" y="46" width="46" height="36" rx="6" fill="#0c2340" stroke="#0369a1" stroke-width="1"/>
+    <text fill="#38bdf8" font-size="13" font-weight="500" text-anchor="middle" dominant-baseline="central" x="563" y="64">4</text></g>
+
+  <!-- brace + sum -->
+  <path d="M440 88 L440 102 L563 102 L563 88" fill="none" stroke="#0369a1" stroke-width="0.5"/>
+  <text fill="#38bdf8" font-size="12" text-anchor="middle" x="502" y="118">sum = 7+9+4 = 20</text>
+
+  <text fill="#475569" font-size="11" x="24" y="155">Greedy: always take the largest available elements first</text>
+</svg>
+</div>
+
+<!-- 2. Interval Scheduling / Merge -->
+<div class="diagram-block">
+<p class="dia-label">2 · Merge overlapping intervals</p>
+<svg class="dia" viewBox="0 0 680 190" role="img">
+  <title>Merge overlapping intervals greedy diagram</title>
+  <desc>Intervals sorted by start, overlapping ones merged greedily</desc>
+  <defs><marker id="a2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+  <text fill="#475569" font-size="11" x="24" y="28">Input intervals (sorted by start)</text>
+  <!-- timeline axis -->
+  <line x1="24" y1="155" x2="640" y2="155" stroke="#1e2535" stroke-width="0.5"/>
+  <text fill="#334155" font-size="10" text-anchor="middle" x="60" y="168">1</text>
+  <text fill="#334155" font-size="10" text-anchor="middle" x="155" y="168">2</text>
+  <text fill="#334155" font-size="10" text-anchor="middle" x="250" y="168">3</text>
+  <text fill="#334155" font-size="10" text-anchor="middle" x="345" y="168">4</text>
+  <text fill="#334155" font-size="10" text-anchor="middle" x="440" y="168">5</text>
+  <text fill="#334155" font-size="10" text-anchor="middle" x="535" y="168">6</text>
+  <text fill="#334155" font-size="10" text-anchor="middle" x="630" y="168">7</text>
+
+  <!-- [1,3] -->
+  <rect x="60" y="42" width="190" height="22" rx="5" fill="#1d3d5e" stroke="#0369a1" stroke-width="0.5"/>
+  <text fill="#60a5fa" font-size="11" x="65" y="57">[1, 3]</text>
+  <!-- [2,4] -->
+  <rect x="155" y="70" width="190" height="22" rx="5" fill="#1d3d5e" stroke="#0369a1" stroke-width="0.5"/>
+  <text fill="#60a5fa" font-size="11" x="160" y="85">[2, 4]</text>
+  <!-- [5,6] -->
+  <rect x="440" y="42" width="95" height="22" rx="5" fill="#1e2535" stroke="#334155" stroke-width="0.5"/>
+  <text fill="#94a3b8" font-size="11" x="445" y="57">[5, 6]</text>
+
+  <!-- merged result -->
+  <text fill="#475569" font-size="11" x="24" y="108">Merged result</text>
+  <rect x="60" y="112" width="285" height="22" rx="5" fill="#0c2d1a" stroke="#059669" stroke-width="1"/>
+  <text fill="#4ade80" font-size="11" font-weight="500" x="65" y="127">[1, 4]  (merged)</text>
+  <rect x="440" y="112" width="95" height="22" rx="5" fill="#1e2535" stroke="#334155" stroke-width="0.5"/>
+  <text fill="#94a3b8" font-size="11" x="445" y="127">[5, 6]</text>
+
+  <!-- overlap indicator -->
+  <line x1="155" y1="38" x2="155" y2="100" stroke="#fbbf24" stroke-width="0.5" stroke-dasharray="3 3"/>
+  <text fill="#fbbf24" font-size="10" x="160" y="36">overlap</text>
+</svg>
+</div>
+
+<!-- 3. Activity Selection -->
+<div class="diagram-block">
+<p class="dia-label">3 · Activity selection — max non-overlapping (sort by end time)</p>
+<svg class="dia" viewBox="0 0 680 200" role="img">
+  <title>Activity selection greedy diagram</title>
+  <desc>Activities sorted by end time, greedily pick non-overlapping ones</desc>
+  <!-- axis -->
+  <line x1="30" y1="172" x2="650" y2="172" stroke="#1e2535" stroke-width="0.5"/>
+  <text fill="#334155" font-size="10" text-anchor="middle" x="60" y="184">0</text>
+  <text fill="#334155" font-size="10" text-anchor="middle" x="170" y="184">2</text>
+  <text fill="#334155" font-size="10" text-anchor="middle" x="280" y="184">4</text>
+  <text fill="#334155" font-size="10" text-anchor="middle" x="390" y="184">6</text>
+  <text fill="#334155" font-size="10" text-anchor="middle" x="500" y="184">8</text>
+  <text fill="#334155" font-size="10" text-anchor="middle" x="610" y="184">10</text>
+
+  <!-- act A [0,3] skipped — ends later than B -->
+  <rect x="60" y="36" width="165" height="22" rx="5" fill="#1e2535" stroke="#334155" stroke-width="0.5"/>
+  <text fill="#64748b" font-size="11" x="65" y="51">A [0,3]  ✗ skipped</text>
+
+  <!-- act B [0,2] selected -->
+  <rect x="60" y="64" width="110" height="22" rx="5" fill="#0c2d1a" stroke="#059669" stroke-width="1"/>
+  <text fill="#4ade80" font-size="11" font-weight="500" x="65" y="79">B [0,2]  ✓ pick</text>
+
+  <!-- act C [2,5] selected -->
+  <rect x="170" y="92" width="165" height="22" rx="5" fill="#0c2d1a" stroke="#059669" stroke-width="1"/>
+  <text fill="#4ade80" font-size="11" font-weight="500" x="175" y="107">C [2,5]  ✓ pick</text>
+
+  <!-- act D [4,7] conflicts -->
+  <rect x="280" y="120" width="165" height="22" rx="5" fill="#1e2535" stroke="#334155" stroke-width="0.5"/>
+  <text fill="#64748b" font-size="11" x="285" y="135">D [4,7]  ✗ overlap</text>
+
+  <!-- act E [6,9] selected -->
+  <rect x="390" y="148" width="165" height="22" rx="5" fill="#0c2d1a" stroke="#059669" stroke-width="1"/>
+  <text fill="#4ade80" font-size="11" font-weight="500" x="395" y="163">E [6,9]  ✓ pick</text>
+
+  <!-- rule -->
+  <text fill="#475569" font-size="11" x="30" y="22">Rule: sort by end time → pick if start ≥ last picked end</text>
+</svg>
+</div>
+
+<!-- 4. Coin / Minimum operations -->
+<div class="diagram-block">
+<p class="dia-label">4 · Greedy coin change (canonical denominations)</p>
+<svg class="dia" viewBox="0 0 680 175" role="img">
+  <title>Greedy coin change diagram</title>
+  <desc>Largest denomination used first, subtract, repeat until amount is zero</desc>
+  <defs><marker id="a4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+  <text fill="#475569" font-size="11" x="24" y="22">Amount = 93. Coins = [50, 20, 10, 5, 2, 1]. Use largest ≤ remaining.</text>
+
+  <!-- step boxes -->
+  <!-- step 1 -->
+  <rect x="20" y="35" width="96" height="52" rx="8" fill="#1a1d2e" stroke="#1e2535" stroke-width="0.5"/>
+  <text fill="#38bdf8" font-size="12" font-weight="500" text-anchor="middle" dominant-baseline="central" x="68" y="52">Rem: 93</text>
+  <text fill="#94a3b8" font-size="11" text-anchor="middle" dominant-baseline="central" x="68" y="72">use 50</text>
+
+  <line x1="116" y1="61" x2="134" y2="61" stroke="#334155" stroke-width="1" marker-end="url(#a4)"/>
+
+  <rect x="136" y="35" width="96" height="52" rx="8" fill="#1a1d2e" stroke="#1e2535" stroke-width="0.5"/>
+  <text fill="#38bdf8" font-size="12" font-weight="500" text-anchor="middle" dominant-baseline="central" x="184" y="52">Rem: 43</text>
+  <text fill="#94a3b8" font-size="11" text-anchor="middle" dominant-baseline="central" x="184" y="72">use 20</text>
+
+  <line x1="232" y1="61" x2="250" y2="61" stroke="#334155" stroke-width="1" marker-end="url(#a4)"/>
+
+  <rect x="252" y="35" width="96" height="52" rx="8" fill="#1a1d2e" stroke="#1e2535" stroke-width="0.5"/>
+  <text fill="#38bdf8" font-size="12" font-weight="500" text-anchor="middle" dominant-baseline="central" x="300" y="52">Rem: 23</text>
+  <text fill="#94a3b8" font-size="11" text-anchor="middle" dominant-baseline="central" x="300" y="72">use 20</text>
+
+  <line x1="348" y1="61" x2="366" y2="61" stroke="#334155" stroke-width="1" marker-end="url(#a4)"/>
+
+  <rect x="368" y="35" width="96" height="52" rx="8" fill="#1a1d2e" stroke="#1e2535" stroke-width="0.5"/>
+  <text fill="#38bdf8" font-size="12" font-weight="500" text-anchor="middle" dominant-baseline="central" x="416" y="52">Rem: 3</text>
+  <text fill="#94a3b8" font-size="11" text-anchor="middle" dominant-baseline="central" x="416" y="72">use 2</text>
+
+  <line x1="464" y1="61" x2="482" y2="61" stroke="#334155" stroke-width="1" marker-end="url(#a4)"/>
+
+  <rect x="484" y="35" width="96" height="52" rx="8" fill="#1a1d2e" stroke="#1e2535" stroke-width="0.5"/>
+  <text fill="#38bdf8" font-size="12" font-weight="500" text-anchor="middle" dominant-baseline="central" x="532" y="52">Rem: 1</text>
+  <text fill="#94a3b8" font-size="11" text-anchor="middle" dominant-baseline="central" x="532" y="72">use 1</text>
+
+  <line x1="580" y1="61" x2="598" y2="61" stroke="#334155" stroke-width="1" marker-end="url(#a4)"/>
+
+  <rect x="600" y="35" width="60" height="52" rx="8" fill="#0c2d1a" stroke="#059669" stroke-width="1"/>
+  <text fill="#4ade80" font-size="12" font-weight="500" text-anchor="middle" dominant-baseline="central" x="630" y="52">0</text>
+  <text fill="#4ade80" font-size="11" text-anchor="middle" dominant-baseline="central" x="630" y="72">done</text>
+
+  <!-- coin tally -->
+  <text fill="#475569" font-size="11" x="24" y="112">Coins used: 50×1, 20×2, 2×1, 1×1 → total 5 coins</text>
+  <text fill="#60a5fa" font-size="11" x="24" y="130">Greedy choice: always subtract the largest coin that fits</text>
+  <text fill="#475569" font-size="11" x="24" y="155">⚠ Only works for canonical coin systems. Use DP for arbitrary denominations.</text>
+</svg>
+</div>
+
+<!-- 5. Two Array Pairing -->
+<div class="diagram-block">
+<p class="dia-label">5 · Two-array pairing — minimize sum of products</p>
+<svg class="dia" viewBox="0 0 680 190" role="img">
+  <title>Two array pairing greedy diagram</title>
+  <desc>Sort A ascending and B descending, pair index by index to minimize sum of products</desc>
+  <defs><marker id="a5" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+  <text fill="#475569" font-size="11" x="24" y="22">Goal: minimize Σ A[i]×B[i]. Strategy: pair smallest with largest.</text>
+
+  <!-- Array A sorted ascending -->
+  <text fill="#60a5fa" font-size="12" x="24" y="50">A (sorted ↑)</text>
+  <g><rect x="24" y="58" width="52" height="34" rx="6" fill="#0c2340" stroke="#0369a1" stroke-width="0.5"/>
+    <text fill="#38bdf8" font-size="13" text-anchor="middle" dominant-baseline="central" x="50" y="75">1</text></g>
+  <g><rect x="82" y="58" width="52" height="34" rx="6" fill="#0c2340" stroke="#0369a1" stroke-width="0.5"/>
+    <text fill="#38bdf8" font-size="13" text-anchor="middle" dominant-baseline="central" x="108" y="75">3</text></g>
+  <g><rect x="140" y="58" width="52" height="34" rx="6" fill="#0c2340" stroke="#0369a1" stroke-width="0.5"/>
+    <text fill="#38bdf8" font-size="13" text-anchor="middle" dominant-baseline="central" x="166" y="75">5</text></g>
+  <g><rect x="198" y="58" width="52" height="34" rx="6" fill="#0c2340" stroke="#0369a1" stroke-width="0.5"/>
+    <text fill="#38bdf8" font-size="13" text-anchor="middle" dominant-baseline="central" x="224" y="75">7</text></g>
+
+  <!-- Array B sorted descending -->
+  <text fill="#a78bfa" font-size="12" x="24" y="116">B (sorted ↓)</text>
+  <g><rect x="24" y="124" width="52" height="34" rx="6" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+    <text fill="#c084fc" font-size="13" text-anchor="middle" dominant-baseline="central" x="50" y="141">8</text></g>
+  <g><rect x="82" y="124" width="52" height="34" rx="6" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+    <text fill="#c084fc" font-size="13" text-anchor="middle" dominant-baseline="central" x="108" y="141">6</text></g>
+  <g><rect x="140" y="124" width="52" height="34" rx="6" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+    <text fill="#c084fc" font-size="13" text-anchor="middle" dominant-baseline="central" x="166" y="141">4</text></g>
+  <g><rect x="198" y="124" width="52" height="34" rx="6" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+    <text fill="#c084fc" font-size="13" text-anchor="middle" dominant-baseline="central" x="224" y="141">2</text></g>
+
+  <!-- pair arrows -->
+  <line x1="50" y1="92" x2="50" y2="122" stroke="#334155" stroke-width="0.5" stroke-dasharray="3 3"/>
+  <line x1="108" y1="92" x2="108" y2="122" stroke="#334155" stroke-width="0.5" stroke-dasharray="3 3"/>
+  <line x1="166" y1="92" x2="166" y2="122" stroke="#334155" stroke-width="0.5" stroke-dasharray="3 3"/>
+  <line x1="224" y1="92" x2="224" y2="122" stroke="#334155" stroke-width="0.5" stroke-dasharray="3 3"/>
+
+  <!-- product labels -->
+  <text fill="#4ade80" font-size="11" text-anchor="middle" x="50" y="106">1×8</text>
+  <text fill="#4ade80" font-size="11" text-anchor="middle" x="108" y="106">3×6</text>
+  <text fill="#4ade80" font-size="11" text-anchor="middle" x="166" y="106">5×4</text>
+  <text fill="#4ade80" font-size="11" text-anchor="middle" x="224" y="106">7×2</text>
+
+  <!-- sum -->
+  <text fill="#475569" font-size="11" x="290" y="75">Min sum</text>
+  <text fill="#38bdf8" font-size="14" font-weight="500" x="290" y="95">= 8+18+20+14</text>
+  <text fill="#4ade80" font-size="14" font-weight="500" x="290" y="115">= 60</text>
+  <text fill="#475569" font-size="11" x="290" y="142">vs worst (both ↑): 1×2+3×4+5×6+7×8 = 100</text>
+
+  <text fill="#60a5fa" font-size="11" x="24" y="178">Rearrangement inequality: Σ min when oppositely sorted</text>
+</svg>
+</div>
+
+<!-- 6. Maximize sum by flipping K negatives -->
+<div class="diagram-block">
+<p class="dia-label">6 · Maximize sum — flip at most K negatives</p>
+<svg class="dia" viewBox="0 0 680 180" role="img">
+  <title>Flip K negatives to maximize sum</title>
+  <desc>Sort by absolute value descending, flip negatives from largest absolute value first</desc>
+  <defs><marker id="a6" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+  <text fill="#475569" font-size="11" x="24" y="22">Array: [-7, -3, 4, 2, -1]  K=2. Sort by |val| desc, flip negatives first.</text>
+
+  <!-- sorted by |val| desc before flip -->
+  <text fill="#475569" font-size="11" x="24" y="48">Sorted |val|↓</text>
+  <g><rect x="24" y="56" width="60" height="34" rx="6" fill="#3b1919" stroke="#991b1b" stroke-width="0.5"/>
+    <text fill="#f87171" font-size="13" text-anchor="middle" dominant-baseline="central" x="54" y="73">-7</text></g>
+  <g><rect x="90" y="56" width="60" height="34" rx="6" fill="#1a1d2e" stroke="#334155" stroke-width="0.5"/>
+    <text fill="#94a3b8" font-size="13" text-anchor="middle" dominant-baseline="central" x="120" y="73">4</text></g>
+  <g><rect x="156" y="56" width="60" height="34" rx="6" fill="#3b1919" stroke="#991b1b" stroke-width="0.5"/>
+    <text fill="#f87171" font-size="13" text-anchor="middle" dominant-baseline="central" x="186" y="73">-3</text></g>
+  <g><rect x="222" y="56" width="60" height="34" rx="6" fill="#1a1d2e" stroke="#334155" stroke-width="0.5"/>
+    <text fill="#94a3b8" font-size="13" text-anchor="middle" dominant-baseline="central" x="252" y="73">2</text></g>
+  <g><rect x="288" y="56" width="60" height="34" rx="6" fill="#3b1919" stroke="#991b1b" stroke-width="0.5"/>
+    <text fill="#f87171" font-size="13" text-anchor="middle" dominant-baseline="central" x="318" y="73">-1</text></g>
+
+  <!-- flip arrows for K=2 -->
+  <path d="M54 56 Q54 30 54 20" fill="none" stroke="#059669" stroke-width="1" marker-end="url(#a6)"/>
+  <text fill="#4ade80" font-size="10" text-anchor="middle" x="54" y="18">flip</text>
+  <path d="M186 56 Q186 30 186 20" fill="none" stroke="#059669" stroke-width="1" marker-end="url(#a6)"/>
+  <text fill="#4ade80" font-size="10" text-anchor="middle" x="186" y="18">flip</text>
+
+  <!-- after flip -->
+  <text fill="#475569" font-size="11" x="24" y="116">After K=2 flips</text>
+  <g><rect x="24" y="124" width="60" height="34" rx="6" fill="#0c2d1a" stroke="#059669" stroke-width="1"/>
+    <text fill="#4ade80" font-size="13" font-weight="500" text-anchor="middle" dominant-baseline="central" x="54" y="141">+7</text></g>
+  <g><rect x="90" y="124" width="60" height="34" rx="6" fill="#0c2d1a" stroke="#059669" stroke-width="1"/>
+    <text fill="#4ade80" font-size="13" font-weight="500" text-anchor="middle" dominant-baseline="central" x="120" y="141">4</text></g>
+  <g><rect x="156" y="124" width="60" height="34" rx="6" fill="#0c2d1a" stroke="#059669" stroke-width="1"/>
+    <text fill="#4ade80" font-size="13" font-weight="500" text-anchor="middle" dominant-baseline="central" x="186" y="141">+3</text></g>
+  <g><rect x="222" y="124" width="60" height="34" rx="6" fill="#1a1d2e" stroke="#334155" stroke-width="0.5"/>
+    <text fill="#94a3b8" font-size="13" text-anchor="middle" dominant-baseline="central" x="252" y="141">2</text></g>
+  <g><rect x="288" y="124" width="60" height="34" rx="6" fill="#3b1919" stroke="#991b1b" stroke-width="0.5"/>
+    <text fill="#f87171" font-size="13" text-anchor="middle" dominant-baseline="central" x="318" y="141">-1</text></g>
+
+  <text fill="#38bdf8" font-size="13" font-weight="500" x="400" y="148">Sum = 7+4+3+2−1 = 15</text>
+  <text fill="#60a5fa" font-size="11" x="24" y="172">If K still odd after all negatives gone: flip smallest |val| element</text>
+</svg>
+</div>
+
+<!-- 7. Jump Game -->
+<div class="diagram-block">
+<p class="dia-label">7 · Jump game — track maximum reachable index</p>
+<svg class="dia" viewBox="0 0 680 180" role="img">
+  <title>Jump game greedy diagram</title>
+  <desc>Track the farthest reachable index at each step; if current index exceeds max reach, can't proceed</desc>
+  <defs><marker id="a7" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+  <text fill="#475569" font-size="11" x="24" y="22">Array: [3, 1, 1, 0, 4].  maxReach = max(maxReach, i + a[i])</text>
+
+  <!-- cells -->
+  <g><rect x="24" y="36" width="70" height="50" rx="8" fill="#0c2340" stroke="#0369a1" stroke-width="1"/>
+    <text fill="#38bdf8" font-size="14" font-weight="500" text-anchor="middle" dominant-baseline="central" x="59" y="53">3</text>
+    <text fill="#60a5fa" font-size="10" text-anchor="middle" dominant-baseline="central" x="59" y="72">i=0</text></g>
+  <g><rect x="104" y="36" width="70" height="50" rx="8" fill="#1a1d2e" stroke="#1e2535" stroke-width="0.5"/>
+    <text fill="#94a3b8" font-size="14" text-anchor="middle" dominant-baseline="central" x="139" y="53">1</text>
+    <text fill="#475569" font-size="10" text-anchor="middle" dominant-baseline="central" x="139" y="72">i=1</text></g>
+  <g><rect x="184" y="36" width="70" height="50" rx="8" fill="#1a1d2e" stroke="#1e2535" stroke-width="0.5"/>
+    <text fill="#94a3b8" font-size="14" text-anchor="middle" dominant-baseline="central" x="219" y="53">1</text>
+    <text fill="#475569" font-size="10" text-anchor="middle" dominant-baseline="central" x="219" y="72">i=2</text></g>
+  <g><rect x="264" y="36" width="70" height="50" rx="8" fill="#3b1919" stroke="#991b1b" stroke-width="1"/>
+    <text fill="#f87171" font-size="14" font-weight="500" text-anchor="middle" dominant-baseline="central" x="299" y="53">0</text>
+    <text fill="#f87171" font-size="10" text-anchor="middle" dominant-baseline="central" x="299" y="72">i=3 ✗</text></g>
+  <g><rect x="344" y="36" width="70" height="50" rx="8" fill="#1e2535" stroke="#334155" stroke-width="0.5"/>
+    <text fill="#64748b" font-size="14" text-anchor="middle" dominant-baseline="central" x="379" y="53">4</text>
+    <text fill="#475569" font-size="10" text-anchor="middle" dominant-baseline="central" x="379" y="72">i=4</text></g>
+
+  <!-- max reach bar -->
+  <text fill="#475569" font-size="11" x="24" y="106">maxReach trace</text>
+  <rect x="24" y="112" width="310" height="12" rx="4" fill="#0c2340" stroke="#0369a1" stroke-width="0.5"/>
+  <text fill="#38bdf8" font-size="10" x="28" y="122">maxReach = max(0,3) = 3 — covers i=0..3</text>
+  <!-- i=3: 3+0=3 still 3 so stuck -->
+  <path d="M299 86 L299 112" fill="none" stroke="#991b1b" stroke-width="0.5" stroke-dasharray="3 3"/>
+  <text fill="#f87171" font-size="10" text-anchor="middle" x="299" y="142">stuck: i=3 > maxReach=3? No, but a[3]=0 → can't advance past 3</text>
+  <text fill="#f87171" font-size="11" x="24" y="160">Cannot reach index 4 → output: "Cannot reach end"</text>
+
+  <!-- jump arc from i=0 -->
+  <path d="M59 36 Q59 10 299 10 Q330 10 334 36" fill="none" stroke="#0369a1" stroke-width="0.5" stroke-dasharray="4 3"/>
+  <text fill="#475569" font-size="10" text-anchor="middle" x="180" y="9">max jump from i=0: reach 3</text>
+</svg>
+</div>
+
+<!-- 8. Gas Station -->
+<div class="diagram-block">
+<p class="dia-label">8 · Gas station — greedy start point</p>
+<svg class="dia" viewBox="0 0 680 195" role="img">
+  <title>Gas station greedy diagram</title>
+  <desc>Track cumulative tank; when negative reset start to next station</desc>
+  <defs><marker id="a8" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+  <text fill="#475569" font-size="11" x="24" y="22">gas=[2,4,1,5,3]  cost=[3,1,4,2,2].  diff=[-1,3,-3,3,1]</text>
+
+  <!-- stations -->
+  <g><circle cx="60"  cy="80" r="24" fill="#1a1d2e" stroke="#334155" stroke-width="0.5"/>
+    <text fill="#94a3b8" font-size="11" text-anchor="middle" dominant-baseline="central" x="60"  y="76">S0</text>
+    <text fill="#f87171" font-size="10" text-anchor="middle" dominant-baseline="central" x="60"  y="90">-1</text></g>
+  <line x1="84" y1="80" x2="116" y2="80" stroke="#334155" stroke-width="1" marker-end="url(#a8)"/>
+  <g><circle cx="140" cy="80" r="24" fill="#0c2d1a" stroke="#059669" stroke-width="1"/>
+    <text fill="#4ade80" font-size="11" text-anchor="middle" dominant-baseline="central" x="140" y="76">S1</text>
+    <text fill="#4ade80" font-size="11" font-weight="500" text-anchor="middle" dominant-baseline="central" x="140" y="90">+3</text></g>
+  <line x1="164" y1="80" x2="196" y2="80" stroke="#334155" stroke-width="1" marker-end="url(#a8)"/>
+  <g><circle cx="220" cy="80" r="24" fill="#1a1d2e" stroke="#334155" stroke-width="0.5"/>
+    <text fill="#94a3b8" font-size="11" text-anchor="middle" dominant-baseline="central" x="220" y="76">S2</text>
+    <text fill="#f87171" font-size="10" text-anchor="middle" dominant-baseline="central" x="220" y="90">-3</text></g>
+  <line x1="244" y1="80" x2="276" y2="80" stroke="#334155" stroke-width="1" marker-end="url(#a8)"/>
+  <g><circle cx="300" cy="80" r="24" fill="#0c2d1a" stroke="#059669" stroke-width="1"/>
+    <text fill="#4ade80" font-size="11" text-anchor="middle" dominant-baseline="central" x="300" y="76">S3</text>
+    <text fill="#4ade80" font-size="11" font-weight="500" text-anchor="middle" dominant-baseline="central" x="300" y="90">+3</text></g>
+  <line x1="324" y1="80" x2="356" y2="80" stroke="#334155" stroke-width="1" marker-end="url(#a8)"/>
+  <g><circle cx="380" cy="80" r="24" fill="#0c2d1a" stroke="#059669" stroke-width="1"/>
+    <text fill="#4ade80" font-size="11" text-anchor="middle" dominant-baseline="central" x="380" y="76">S4</text>
+    <text fill="#4ade80" font-size="11" font-weight="500" text-anchor="middle" dominant-baseline="central" x="380" y="90">+1</text></g>
+
+  <!-- tank trace below -->
+  <text fill="#475569" font-size="11" x="24" y="120">Tank (running sum, reset when negative)</text>
+  <text fill="#f87171" font-size="11" x="36"  y="138">-1 → reset</text>
+  <text fill="#4ade80" font-size="11" x="116" y="138">start=1, tank=3</text>
+  <text fill="#f87171" font-size="11" x="196" y="138">tank=0 → reset</text>
+  <text fill="#4ade80" font-size="11" x="276" y="138">start=3, tank=3</text>
+  <text fill="#4ade80" font-size="11" x="356" y="138">tank=4</text>
+
+  <!-- verdict -->
+  <text fill="#475569" font-size="11" x="24" y="162">total diff = -1+3-3+3+1 = 3 ≥ 0 → solution exists</text>
+  <text fill="#4ade80" font-size="12" font-weight="500" x="24" y="180">Start at station 3 (last reset point)</text>
+</svg>
+</div>
+
+<!-- 9. Job Sequencing -->
+<div class="diagram-block">
+<p class="dia-label">9 · Job sequencing with deadlines</p>
+<svg class="dia" viewBox="0 0 680 200" role="img">
+  <title>Job sequencing with deadlines greedy diagram</title>
+  <desc>Sort by profit desc, assign each job to latest free slot before its deadline</desc>
+  <defs><marker id="a9" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+  <text fill="#475569" font-size="11" x="24" y="22">Jobs sorted by profit ↓. Each cell = one time slot. Find latest free slot ≤ deadline.</text>
+
+  <!-- job list -->
+  <text fill="#94a3b8" font-size="11" x="24" y="46">Jobs (deadline, profit)</text>
+  <rect x="24" y="54" width="130" height="26" rx="5" fill="#0c2d1a" stroke="#059669" stroke-width="0.5"/>
+  <text fill="#4ade80" font-size="11" dominant-baseline="central" x="30" y="67">J1: d=4, p=50 ✓</text>
+  <rect x="24" y="84" width="130" height="26" rx="5" fill="#0c2d1a" stroke="#059669" stroke-width="0.5"/>
+  <text fill="#4ade80" font-size="11" dominant-baseline="central" x="30" y="97">J2: d=2, p=30 ✓</text>
+  <rect x="24" y="114" width="130" height="26" rx="5" fill="#0c2d1a" stroke="#059669" stroke-width="0.5"/>
+  <text fill="#4ade80" font-size="11" dominant-baseline="central" x="30" y="127">J3: d=3, p=20 ✓</text>
+  <rect x="24" y="144" width="130" height="26" rx="5" fill="#1e2535" stroke="#334155" stroke-width="0.5"/>
+  <text fill="#64748b" font-size="11" dominant-baseline="central" x="30" y="157">J4: d=1, p=10 ✗</text>
+
+  <!-- time slots -->
+  <text fill="#94a3b8" font-size="11" x="220" y="46">Time slots (1 to 4)</text>
+  <rect x="220" y="54" width="80" height="36" rx="6" fill="#1e2535" stroke="#334155" stroke-width="0.5"/>
+  <text fill="#94a3b8" font-size="10" text-anchor="middle" dominant-baseline="central" x="260" y="66">slot 1</text>
+  <text fill="#64748b" font-size="10" text-anchor="middle" dominant-baseline="central" x="260" y="79">J4 no slot</text>
+
+  <rect x="310" y="54" width="80" height="36" rx="6" fill="#0c2d1a" stroke="#059669" stroke-width="1"/>
+  <text fill="#4ade80" font-size="10" text-anchor="middle" dominant-baseline="central" x="350" y="66">slot 2</text>
+  <text fill="#4ade80" font-size="10" font-weight="500" text-anchor="middle" dominant-baseline="central" x="350" y="79">J2 (p=30)</text>
+
+  <rect x="400" y="54" width="80" height="36" rx="6" fill="#0c2d1a" stroke="#059669" stroke-width="1"/>
+  <text fill="#4ade80" font-size="10" text-anchor="middle" dominant-baseline="central" x="440" y="66">slot 3</text>
+  <text fill="#4ade80" font-size="10" font-weight="500" text-anchor="middle" dominant-baseline="central" x="440" y="79">J3 (p=20)</text>
+
+  <rect x="490" y="54" width="80" height="36" rx="6" fill="#0c2d1a" stroke="#059669" stroke-width="1"/>
+  <text fill="#4ade80" font-size="10" text-anchor="middle" dominant-baseline="central" x="530" y="66">slot 4</text>
+  <text fill="#4ade80" font-size="10" font-weight="500" text-anchor="middle" dominant-baseline="central" x="530" y="79">J1 (p=50)</text>
+
+  <!-- explanation rows -->
+  <line x1="154" y1="67" x2="218" y2="67" stroke="#334155" stroke-width="0.5" stroke-dasharray="3 3"/>
+  <line x1="154" y1="97" x2="348" y2="72" stroke="#059669" stroke-width="0.5" stroke-dasharray="3 3"/>
+  <line x1="154" y1="127" x2="438" y2="72" stroke="#059669" stroke-width="0.5" stroke-dasharray="3 3"/>
+  <line x1="154" y1="157" x2="218" y2="72" stroke="#991b1b" stroke-width="0.5" stroke-dasharray="3 3"/>
+
+  <text fill="#475569" font-size="11" x="24" y="108">Assign each job to the latest free slot ≤ its deadline (greedy: highest profit first)</text>
+  <text fill="#38bdf8" font-size="12" font-weight="500" x="24" y="128">Total profit = 50+30+20 = 100. Jobs done = 3.</text>
+  <text fill="#475569" font-size="11" x="24" y="150">J4 skipped: slot 1 was its only option but already would conflict — no free slot.</text>
+</svg>
+</div>
+
+<!-- 10. Fractional Knapsack -->
+<div class="diagram-block">
+<p class="dia-label">10 · Fractional knapsack — value/weight ratio sort</p>
+<svg class="dia" viewBox="0 0 680 185" role="img">
+  <title>Fractional knapsack greedy diagram</title>
+  <desc>Sort items by value/weight ratio descending, fill knapsack greedily taking fractions as needed</desc>
+  <defs><marker id="a10" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+  <text fill="#475569" font-size="11" x="24" y="22">Capacity W=15. Items sorted by val/wt ratio ↓. Fill greedily, take fraction if needed.</text>
+
+  <!-- items as bars (width proportional to weight) -->
+  <text fill="#94a3b8" font-size="11" x="24" y="46">Items (sorted by ratio)</text>
+  <!-- item A: val=60,wt=10, ratio=6 -->
+  <rect x="24" y="54" width="100" height="28" rx="5" fill="#0c2d1a" stroke="#059669" stroke-width="1"/>
+  <text fill="#4ade80" font-size="11" dominant-baseline="central" x="30" y="68">A  wt=10  val=60  ratio=6  ✓ full</text>
+
+  <!-- item B: val=20,wt=5, ratio=4 -->
+  <rect x="24" y="88" width="50" height="28" rx="5" fill="#0c2d1a" stroke="#059669" stroke-width="1"/>
+  <text fill="#4ade80" font-size="11" dominant-baseline="central" x="30" y="102">B  wt=5  val=20  ratio=4  ✓ full</text>
+
+  <!-- item C: val=30,wt=20, ratio=1.5 -->
+  <rect x="24" y="122" width="60" height="28" rx="5" fill="#1a2540" stroke="#0369a1" stroke-width="0.5"/>
+  <rect x="24" y="122" width="0" height="28" rx="5" fill="#0c2040" stroke="none"/>
+  <text fill="#60a5fa" font-size="11" dominant-baseline="central" x="30" y="136">C  wt=20  val=30  ratio=1.5  ✓ 0/20 (cap full)</text>
+
+  <!-- knapsack capacity bar -->
+  <text fill="#94a3b8" font-size="11" x="400" y="46">Knapsack W=15</text>
+  <!-- taken from A: 10 units -->
+  <rect x="400" y="54" width="150" height="26" rx="5" fill="#0c2d1a" stroke="#059669" stroke-width="1"/>
+  <text fill="#4ade80" font-size="10" text-anchor="middle" dominant-baseline="central" x="475" y="67">Item A: 10 units (val=60)</text>
+  <!-- taken from B: 5 units -->
+  <rect x="400" y="84" width="75" height="26" rx="5" fill="#0c2d1a" stroke="#059669" stroke-width="1"/>
+  <text fill="#4ade80" font-size="10" text-anchor="middle" dominant-baseline="central" x="437" y="97">B: 5 (val=20)</text>
+
+  <!-- capacity full indicator -->
+  <line x1="400" y1="54" x2="400" y2="116" stroke="#334155" stroke-width="0.5"/>
+  <line x1="550" y1="54" x2="550" y2="116" stroke="#059669" stroke-width="0.5" stroke-dasharray="3 3"/>
+  <text fill="#4ade80" font-size="10" x="555" y="90">W=15 full</text>
+
+  <text fill="#38bdf8" font-size="12" font-weight="500" x="400" y="140">Total value = 60 + 20 = 80.00</text>
+  <text fill="#475569" font-size="11" x="24" y="170">Unlike 0/1 knapsack, we can take fractions → greedy by ratio is always optimal</text>
+</svg>
+</div>
+
+</div>

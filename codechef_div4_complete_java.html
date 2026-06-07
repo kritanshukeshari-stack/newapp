@@ -1,0 +1,1057 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.root{background:#111318;color:#e2e8f0;font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;padding:10%}
+.pg-title{font-size:22px;font-weight:500;color:#34d399;margin-bottom:5px}
+.pg-sub{font-size:13px;color:#475569;margin-bottom:26px}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.tab{background:#1a1f2e;border:0.5px solid #252d3d;border-radius:8px;padding:6px 14px;font-size:13px;color:#94a3b8;cursor:pointer;transition:all .15s}
+.tab:hover{color:#34d399;border-color:#059669}
+.tab.active{background:#0d2a20;color:#34d399;border-color:#059669}
+.sec{display:none}.sec.active{display:block}
+.card{background:#1a1d2e;border:0.5px solid #252840;border-radius:12px;padding:20px 24px;margin-bottom:20px}
+.ch{display:flex;align-items:center;gap:10px;margin-bottom:11px}
+.badge{font-size:11px;font-weight:500;padding:3px 10px;border-radius:6px}
+.be{background:#0d2a20;color:#34d399}
+.bb{background:#1a2540;color:#60a5fa}
+.ct{font-size:15px;font-weight:500;color:#e2e8f0}
+.algo{background:#0c0f17;border-left:3px solid #059669;border-radius:4px;padding:10px 14px;margin-bottom:12px;font-size:13px;color:#94a3b8;line-height:1.65}
+.algo strong{color:#34d399;font-weight:500}
+pre{background:#0a0c14;border:0.5px solid #1a1e30;border-radius:8px;padding:14px 16px;font-family:'Cascadia Code','Fira Code',monospace;font-size:12px;line-height:1.8;color:#cdd6f4;overflow-x:auto;white-space:pre;margin-bottom:10px}
+.kw{color:#c084fc}.ty{color:#89b4fa}.fn{color:#6ee7b7}.cm{color:#4a5568;font-style:italic}.st{color:#a6e3a1}.nm{color:#fab387}.cl{color:#f9a8d4}
+.cx{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.chip{background:#141726;border:0.5px solid #252840;border-radius:6px;padding:3px 11px;font-size:12px;color:#64748b}
+.chip span{color:#f9a8d4;font-weight:500}
+.tip{background:#0d1f17;border:0.5px solid #134e2a;border-radius:8px;padding:9px 13px;font-size:13px;color:#4ade80;margin-top:8px}
+</style>
+<div class="root">
+<h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">CodeChef Div 4 Arrays and Strings — complete Java code for all patterns</h2>
+<p class="pg-title">CodeChef Div 4 — Arrays & Strings</p>
+<p class="pg-sub">Complete runnable Java code for every question pattern</p>
+<div class="tabs">
+  <button class="tab active" onclick="sw('linear',this)">Linear Scan</button>
+  <button class="tab" onclick="sw('freq',this)">Frequency</button>
+  <button class="tab" onclick="sw('prefix',this)">Prefix Sum</button>
+  <button class="tab" onclick="sw('sort',this)">Sorting</button>
+  <button class="tab" onclick="sw('str',this)">Strings</button>
+  <button class="tab" onclick="sw('search',this)">Searching</button>
+  <button class="tab" onclick="sw('twop',this)">Two Pointers</button>
+  <button class="tab" onclick="sw('slide',this)">Sliding Window</button>
+</div>
+
+<div class="sec active" id="linear">
+
+<div class="card">
+<div class="ch"><span class="badge be">Easy</span><span class="ct">Max, min, sum, average</span></div>
+<div class="algo"><strong>Algorithm:</strong> Single pass through array. Maintain running max, min, sum. Average = sum / n.</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cl">MaxMinSum</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        <span class="ty">int</span> n = sc.nextInt();
+        <span class="ty">int</span>[] a = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) a[i] = sc.nextInt();
+
+        <span class="ty">int</span> max = a[<span class="nm">0</span>], min = a[<span class="nm">0</span>];
+        <span class="ty">long</span> sum = <span class="nm">0</span>;
+        <span class="kw">for</span> (<span class="ty">int</span> x : a) {
+            <span class="kw">if</span> (x &gt; max) max = x;
+            <span class="kw">if</span> (x &lt; min) min = x;
+            sum += x;
+        }
+        <span class="ty">double</span> avg = (<span class="ty">double</span>) sum / n;
+        System.out.println(<span class="st">"Max: "</span> + max);
+        System.out.println(<span class="st">"Min: "</span> + min);
+        System.out.println(<span class="st">"Sum: "</span> + sum);
+        System.out.println(<span class="st">"Avg: "</span> + avg);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge be">Easy</span><span class="ct">Second largest element</span></div>
+<div class="algo"><strong>Algorithm:</strong> Track two variables: largest and secondLargest. Update both in one pass without sorting.</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cl">SecondLargest</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        <span class="ty">int</span> n = sc.nextInt();
+        <span class="ty">int</span>[] a = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) a[i] = sc.nextInt();
+
+        <span class="ty">int</span> first = Integer.MIN_VALUE;
+        <span class="ty">int</span> second = Integer.MIN_VALUE;
+        <span class="kw">for</span> (<span class="ty">int</span> x : a) {
+            <span class="kw">if</span> (x &gt; first) {
+                second = first;
+                first = x;
+            } <span class="kw">else if</span> (x &gt; second &amp;&amp; x != first) {
+                second = x;
+            }
+        }
+        <span class="kw">if</span> (second == Integer.MIN_VALUE)
+            System.out.println(<span class="st">"No second largest"</span>);
+        <span class="kw">else</span>
+            System.out.println(<span class="st">"Second largest: "</span> + second);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge be">Easy</span><span class="ct">Count elements satisfying condition</span></div>
+<div class="algo"><strong>Algorithm:</strong> Scan once, increment counter when condition is true. Works for even/odd, divisible by k, greater than x, negative numbers, zeros.</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cl">CountCondition</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        <span class="ty">int</span> n = sc.nextInt();
+        <span class="ty">int</span> k = sc.nextInt();
+        <span class="ty">int</span>[] a = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) a[i] = sc.nextInt();
+
+        <span class="ty">int</span> even = <span class="nm">0</span>, odd = <span class="nm">0</span>, neg = <span class="nm">0</span>, pos = <span class="nm">0</span>;
+        <span class="ty">int</span> divByK = <span class="nm">0</span>, zeros = <span class="nm">0</span>;
+        <span class="kw">for</span> (<span class="ty">int</span> x : a) {
+            <span class="kw">if</span> (x % <span class="nm">2</span> == <span class="nm">0</span>) even++;
+            <span class="kw">else</span> odd++;
+            <span class="kw">if</span> (x &lt; <span class="nm">0</span>) neg++;
+            <span class="kw">if</span> (x &gt; <span class="nm">0</span>) pos++;
+            <span class="kw">if</span> (x == <span class="nm">0</span>) zeros++;
+            <span class="kw">if</span> (x % k == <span class="nm">0</span>) divByK++;
+        }
+        System.out.println(<span class="st">"Even: "</span> + even + <span class="st">", Odd: "</span> + odd);
+        System.out.println(<span class="st">"Positive: "</span> + pos + <span class="st">", Negative: "</span> + neg);
+        System.out.println(<span class="st">"Zeros: "</span> + zeros);
+        System.out.println(<span class="st">"Divisible by k: "</span> + divByK);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge bb">Basic</span><span class="ct">Check if array is sorted</span></div>
+<div class="algo"><strong>Algorithm:</strong> Compare each adjacent pair. If any a[i] &gt; a[i+1], not sorted ascending. Check both ascending and descending in one pass.</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cl">CheckSorted</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        <span class="ty">int</span> n = sc.nextInt();
+        <span class="ty">int</span>[] a = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) a[i] = sc.nextInt();
+
+        <span class="ty">boolean</span> asc = <span class="kw">true</span>, desc = <span class="kw">true</span>;
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n - <span class="nm">1</span>; i++) {
+            <span class="kw">if</span> (a[i] &gt; a[i + <span class="nm">1</span>]) asc = <span class="kw">false</span>;
+            <span class="kw">if</span> (a[i] &lt; a[i + <span class="nm">1</span>]) desc = <span class="kw">false</span>;
+        }
+        <span class="kw">if</span> (asc) System.out.println(<span class="st">"Sorted ascending"</span>);
+        <span class="kw">else if</span> (desc) System.out.println(<span class="st">"Sorted descending"</span>);
+        <span class="kw">else</span> System.out.println(<span class="st">"Not sorted"</span>);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge bb">Basic</span><span class="ct">Find first and last occurrence of target</span></div>
+<div class="algo"><strong>Algorithm:</strong> Single pass — record index when element equals target. First occurrence updates only once; last occurrence updates every time.</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cl">FirstLastOccurrence</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        <span class="ty">int</span> n = sc.nextInt();
+        <span class="ty">int</span> target = sc.nextInt();
+        <span class="ty">int</span>[] a = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) a[i] = sc.nextInt();
+
+        <span class="ty">int</span> first = -<span class="nm">1</span>, last = -<span class="nm">1</span>;
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) {
+            <span class="kw">if</span> (a[i] == target) {
+                <span class="kw">if</span> (first == -<span class="nm">1</span>) first = i;
+                last = i;
+            }
+        }
+        System.out.println(<span class="st">"First: "</span> + first + <span class="st">", Last: "</span> + last);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+</div>
+
+</div>
+
+<div class="sec" id="freq">
+
+<div class="card">
+<div class="ch"><span class="badge be">Easy</span><span class="ct">Frequency using array (small values)</span></div>
+<div class="algo"><strong>Algorithm:</strong> Create freq[] of size max_value+1. freq[x]++ for each element. Works when values are bounded (e.g., 0 to 10^6).</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cl">FreqArray</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        <span class="ty">int</span> n = sc.nextInt();
+        <span class="ty">int</span>[] a = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="ty">int</span> maxVal = <span class="nm">0</span>;
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) {
+            a[i] = sc.nextInt();
+            maxVal = Math.max(maxVal, a[i]);
+        }
+        <span class="ty">int</span>[] freq = <span class="kw">new</span> <span class="ty">int</span>[maxVal + <span class="nm">1</span>];
+        <span class="kw">for</span> (<span class="ty">int</span> x : a) freq[x]++;
+
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt;= maxVal; i++) {
+            <span class="kw">if</span> (freq[i] &gt; <span class="nm">0</span>)
+                System.out.println(i + <span class="st">" appears "</span> + freq[i] + <span class="st">" times"</span>);
+        }
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(maxVal)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge be">Easy</span><span class="ct">Frequency using HashMap (large values)</span></div>
+<div class="algo"><strong>Algorithm:</strong> Use HashMap when values can be large or negative. getOrDefault avoids null checks. Find most/least frequent element by scanning the map.</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cl">FreqHashMap</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        <span class="ty">int</span> n = sc.nextInt();
+        Map&lt;Integer, Integer&gt; freq = <span class="kw">new</span> HashMap&lt;&gt;();
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) {
+            <span class="ty">int</span> x = sc.nextInt();
+            freq.put(x, freq.getOrDefault(x, <span class="nm">0</span>) + <span class="nm">1</span>);
+        }
+        <span class="ty">int</span> maxFreq = <span class="nm">0</span>, minFreq = Integer.MAX_VALUE;
+        <span class="ty">int</span> mostFreqElem = <span class="nm">0</span>, leastFreqElem = <span class="nm">0</span>;
+        <span class="kw">for</span> (Map.Entry&lt;Integer, Integer&gt; e : freq.entrySet()) {
+            <span class="kw">if</span> (e.getValue() &gt; maxFreq) {
+                maxFreq = e.getValue();
+                mostFreqElem = e.getKey();
+            }
+            <span class="kw">if</span> (e.getValue() &lt; minFreq) {
+                minFreq = e.getValue();
+                leastFreqElem = e.getKey();
+            }
+        }
+        System.out.println(<span class="st">"Most frequent: "</span> + mostFreqElem + <span class="st">" ("</span> + maxFreq + <span class="st">" times)"</span>);
+        System.out.println(<span class="st">"Least frequent: "</span> + leastFreqElem + <span class="st">" ("</span> + minFreq + <span class="st">" times)"</span>);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(n)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge be">Easy</span><span class="ct">Find element appearing once (others appear twice)</span></div>
+<div class="algo"><strong>Algorithm:</strong> XOR all elements. Pairs cancel out (x XOR x = 0). The remaining value is the unique element. O(1) space.</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cl">UniqueXOR</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        <span class="ty">int</span> n = sc.nextInt();
+        <span class="ty">int</span> xor = <span class="nm">0</span>;
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) xor ^= sc.nextInt();
+        System.out.println(<span class="st">"Unique element: "</span> + xor);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge bb">Basic</span><span class="ct">Check duplicates / count distinct elements</span></div>
+<div class="algo"><strong>Algorithm:</strong> Add each element to a HashSet. If add() returns false, element already exists — duplicate found. Size of set = count of distinct elements.</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cl">DuplicateCheck</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        <span class="ty">int</span> n = sc.nextInt();
+        <span class="ty">int</span>[] a = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) a[i] = sc.nextInt();
+
+        Set&lt;Integer&gt; seen = <span class="kw">new</span> HashSet&lt;&gt;();
+        List&lt;Integer&gt; duplicates = <span class="kw">new</span> ArrayList&lt;&gt;();
+        <span class="kw">for</span> (<span class="ty">int</span> x : a) {
+            <span class="kw">if</span> (!seen.add(x)) duplicates.add(x);
+        }
+        System.out.println(<span class="st">"Has duplicate: "</span> + !duplicates.isEmpty());
+        System.out.println(<span class="st">"Distinct count: "</span> + seen.size());
+        System.out.println(<span class="st">"Duplicate elements: "</span> + duplicates);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(n)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge bb">Basic</span><span class="ct">Find missing number in 1 to N</span></div>
+<div class="algo"><strong>Algorithm:</strong> Expected sum of 1 to N = N*(N+1)/2. Subtract actual sum. The difference is the missing number. No extra space needed.</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cl">MissingNumber</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        <span class="ty">int</span> n = sc.nextInt();
+        <span class="ty">long</span> expected = (<span class="ty">long</span>) n * (n + <span class="nm">1</span>) / <span class="nm">2</span>;
+        <span class="ty">long</span> actual = <span class="nm">0</span>;
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n - <span class="nm">1</span>; i++) actual += sc.nextInt();
+        System.out.println(<span class="st">"Missing number: "</span> + (expected - actual));
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+</div>
+
+</div>
+
+<div class="sec" id="prefix">
+
+<div class="card">
+<div class="ch"><span class="badge be">Easy</span><span class="ct">Range sum query</span></div>
+<div class="algo"><strong>Algorithm:</strong> Build prefix[i] = prefix[i-1] + a[i-1]. Sum of a[l..r] (0-based) = prefix[r+1] - prefix[l]. Answer multiple queries in O(1) each after O(n) build.</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cl">RangeSum</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        <span class="ty">int</span> n = sc.nextInt();
+        <span class="ty">int</span>[] a = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) a[i] = sc.nextInt();
+
+        <span class="ty">long</span>[] prefix = <span class="kw">new</span> <span class="ty">long</span>[n + <span class="nm">1</span>];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++)
+            prefix[i + <span class="nm">1</span>] = prefix[i] + a[i];
+
+        <span class="ty">int</span> q = sc.nextInt();
+        <span class="kw">while</span> (q-- &gt; <span class="nm">0</span>) {
+            <span class="ty">int</span> l = sc.nextInt(), r = sc.nextInt(); <span class="cm">// 0-based</span>
+            System.out.println(prefix[r + <span class="nm">1</span>] - prefix[l]);
+        }
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n + q)</span></div><div class="chip">Space <span>O(n)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge be">Easy</span><span class="ct">Equilibrium index</span></div>
+<div class="algo"><strong>Algorithm:</strong> At index i, left sum = prefix[i], right sum = totalSum - prefix[i+1]. If equal, i is equilibrium. Find all such indices.</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cl">Equilibrium</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        <span class="ty">int</span> n = sc.nextInt();
+        <span class="ty">int</span>[] a = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) a[i] = sc.nextInt();
+
+        <span class="ty">long</span>[] pre = <span class="kw">new</span> <span class="ty">long</span>[n + <span class="nm">1</span>];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) pre[i+<span class="nm">1</span>] = pre[i] + a[i];
+        <span class="ty">long</span> total = pre[n];
+
+        <span class="ty">boolean</span> found = <span class="kw">false</span>;
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) {
+            <span class="ty">long</span> left = pre[i];
+            <span class="ty">long</span> right = total - pre[i + <span class="nm">1</span>];
+            <span class="kw">if</span> (left == right) {
+                System.out.println(<span class="st">"Equilibrium at index: "</span> + i);
+                found = <span class="kw">true</span>;
+            }
+        }
+        <span class="kw">if</span> (!found) System.out.println(<span class="st">"No equilibrium index"</span>);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(n)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge bb">Basic</span><span class="ct">Count even numbers in range [l, r]</span></div>
+<div class="algo"><strong>Algorithm:</strong> Build a separate prefix array counting evens. evenPre[i] = count of even numbers in a[0..i-1]. Answer range query in O(1).</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cl">RangeEvenCount</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        <span class="ty">int</span> n = sc.nextInt();
+        <span class="ty">int</span>[] a = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) a[i] = sc.nextInt();
+
+        <span class="ty">int</span>[] evenPre = <span class="kw">new</span> <span class="ty">int</span>[n + <span class="nm">1</span>];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++)
+            evenPre[i+<span class="nm">1</span>] = evenPre[i] + (a[i] % <span class="nm">2</span> == <span class="nm">0</span> ? <span class="nm">1</span> : <span class="nm">0</span>);
+
+        <span class="ty">int</span> q = sc.nextInt();
+        <span class="kw">while</span> (q-- &gt; <span class="nm">0</span>) {
+            <span class="ty">int</span> l = sc.nextInt(), r = sc.nextInt();
+            System.out.println(evenPre[r+<span class="nm">1</span>] - evenPre[l]);
+        }
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n + q)</span></div><div class="chip">Space <span>O(n)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge bb">Basic</span><span class="ct">Subarray with sum equal to k (count)</span></div>
+<div class="algo"><strong>Algorithm:</strong> Store prefix sum frequencies in a HashMap. For each new prefix sum, check how many previous prefix sums equal (current - k). Those subarrays sum to k.</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cl">SubarraySumK</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        <span class="ty">int</span> n = sc.nextInt(), k = sc.nextInt();
+        <span class="ty">int</span>[] a = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) a[i] = sc.nextInt();
+
+        Map&lt;Long, Integer&gt; map = <span class="kw">new</span> HashMap&lt;&gt;();
+        map.put(<span class="nm">0L</span>, <span class="nm">1</span>);
+        <span class="ty">long</span> prefSum = <span class="nm">0</span>, count = <span class="nm">0</span>;
+        <span class="kw">for</span> (<span class="ty">int</span> x : a) {
+            prefSum += x;
+            count += map.getOrDefault(prefSum - k, <span class="nm">0</span>);
+            map.put(prefSum, map.getOrDefault(prefSum, <span class="nm">0</span>) + <span class="nm">1</span>);
+        }
+        System.out.println(<span class="st">"Count of subarrays with sum "</span> + k + <span class="st">": "</span> + count);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(n)</span></div></div>
+</div>
+
+</div>
+
+<div class="sec" id="sort">
+
+<div class="card">
+<div class="ch"><span class="badge be">Easy</span><span class="ct">Sort and find kth smallest / largest</span></div>
+<div class="algo"><strong>Algorithm:</strong> Arrays.sort() in O(n log n). After sorting, a[k-1] = kth smallest, a[n-k] = kth largest. Also get median easily.</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cl">KthElement</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        <span class="ty">int</span> n = sc.nextInt(), k = sc.nextInt();
+        <span class="ty">int</span>[] a = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) a[i] = sc.nextInt();
+
+        Arrays.sort(a);
+        System.out.println(<span class="st">"Kth smallest: "</span> + a[k - <span class="nm">1</span>]);
+        System.out.println(<span class="st">"Kth largest:  "</span> + a[n - k]);
+        <span class="ty">double</span> median = (n % <span class="nm">2</span> == <span class="nm">1</span>)
+            ? a[n / <span class="nm">2</span>]
+            : (a[n / <span class="nm">2</span> - <span class="nm">1</span>] + a[n / <span class="nm">2</span>]) / <span class="nm">2.0</span>;
+        System.out.println(<span class="st">"Median: "</span> + median);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n log n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge be">Easy</span><span class="ct">Sort custom — by absolute value, by length</span></div>
+<div class="algo"><strong>Algorithm:</strong> Pass a lambda comparator to Arrays.sort(). Works on Integer[] not int[]. For 2D arrays, compare by a specific column.</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cl">CustomSort</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        <span class="ty">int</span> n = sc.nextInt();
+        Integer[] a = <span class="kw">new</span> Integer[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) a[i] = sc.nextInt();
+
+        <span class="cm">// Sort by absolute value ascending</span>
+        Arrays.sort(a, (x, y) -&gt; Math.abs(x) - Math.abs(y));
+        System.out.println(<span class="st">"By abs: "</span> + Arrays.toString(a));
+
+        <span class="cm">// Sort descending</span>
+        Arrays.sort(a, (x, y) -&gt; y - x);
+        System.out.println(<span class="st">"Descending: "</span> + Arrays.toString(a));
+
+        <span class="cm">// Sort strings by length</span>
+        <span class="ty">int</span> m = sc.nextInt();
+        String[] words = <span class="kw">new</span> String[m];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; m; i++) words[i] = sc.next();
+        Arrays.sort(words, (x, y) -&gt; x.length() - y.length());
+        System.out.println(<span class="st">"By length: "</span> + Arrays.toString(words));
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n log n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge bb">Basic</span><span class="ct">Sort pairs by second element</span></div>
+<div class="algo"><strong>Algorithm:</strong> Store pairs as int[2] in a 2D array. Sort using comparator on index 1. Useful for scheduling, ranking, and pairing problems.</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cl">SortPairs</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        <span class="ty">int</span> n = sc.nextInt();
+        <span class="ty">int</span>[][] pairs = <span class="kw">new</span> <span class="ty">int</span>[n][<span class="nm">2</span>];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) {
+            pairs[i][<span class="nm">0</span>] = sc.nextInt();
+            pairs[i][<span class="nm">1</span>] = sc.nextInt();
+        }
+        <span class="cm">// Sort by second element, tie-break by first</span>
+        Arrays.sort(pairs, (x, y) -&gt;
+            x[<span class="nm">1</span>] != y[<span class="nm">1</span>] ? x[<span class="nm">1</span>] - y[<span class="nm">1</span>] : x[<span class="nm">0</span>] - y[<span class="nm">0</span>]);
+        <span class="kw">for</span> (<span class="ty">int</span>[] p : pairs)
+            System.out.println(p[<span class="nm">0</span>] + <span class="st">" "</span> + p[<span class="nm">1</span>]);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n log n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge bb">Basic</span><span class="ct">Remove duplicates from sorted array</span></div>
+<div class="algo"><strong>Algorithm:</strong> After sorting, walk with a write pointer. Copy element only if different from last written. Result is deduplicated in-place.</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cl">RemoveDuplicatesSorted</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        <span class="ty">int</span> n = sc.nextInt();
+        <span class="ty">int</span>[] a = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) a[i] = sc.nextInt();
+
+        Arrays.sort(a);
+        <span class="ty">int</span> write = <span class="nm">1</span>;
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">1</span>; i &lt; n; i++) {
+            <span class="kw">if</span> (a[i] != a[i - <span class="nm">1</span>]) a[write++] = a[i];
+        }
+        System.out.println(<span class="st">"Unique count: "</span> + write);
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; write; i++)
+            System.out.print(a[i] + <span class="st">" "</span>);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n log n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge bb">Basic</span><span class="ct">Merge two sorted arrays</span></div>
+<div class="algo"><strong>Algorithm:</strong> Use two pointers i, j on each array. Always pick the smaller element and advance that pointer. Fill result array of size n+m.</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cl">MergeSorted</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        <span class="ty">int</span> n = sc.nextInt(), m = sc.nextInt();
+        <span class="ty">int</span>[] a = <span class="kw">new</span> <span class="ty">int</span>[n], b = <span class="kw">new</span> <span class="ty">int</span>[m];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) a[i] = sc.nextInt();
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; m; i++) b[i] = sc.nextInt();
+
+        <span class="ty">int</span>[] result = <span class="kw">new</span> <span class="ty">int</span>[n + m];
+        <span class="ty">int</span> i = <span class="nm">0</span>, j = <span class="nm">0</span>, k = <span class="nm">0</span>;
+        <span class="kw">while</span> (i &lt; n &amp;&amp; j &lt; m)
+            result[k++] = (a[i] &lt;= b[j]) ? a[i++] : b[j++];
+        <span class="kw">while</span> (i &lt; n) result[k++] = a[i++];
+        <span class="kw">while</span> (j &lt; m) result[k++] = b[j++];
+
+        System.out.println(Arrays.toString(result));
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n + m)</span></div><div class="chip">Space <span>O(n + m)</span></div></div>
+</div>
+
+</div>
+
+<div class="sec" id="str">
+
+<div class="card">
+<div class="ch"><span class="badge be">Easy</span><span class="ct">Count vowels, consonants, digits, spaces</span></div>
+<div class="algo"><strong>Algorithm:</strong> Iterate each character. Use Character methods: isDigit(), isLetter(), isUpperCase(), isWhitespace(). Check vowels with a string contains check.</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cl">CharCount</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        String s = sc.nextLine();
+        <span class="ty">int</span> vowels=<span class="nm">0</span>, consonants=<span class="nm">0</span>, digits=<span class="nm">0</span>;
+        <span class="ty">int</span> spaces=<span class="nm">0</span>, upper=<span class="nm">0</span>, lower=<span class="nm">0</span>;
+
+        <span class="kw">for</span> (<span class="ty">char</span> c : s.toCharArray()) {
+            <span class="kw">if</span> (Character.isDigit(c)) digits++;
+            <span class="kw">else if</span> (Character.isWhitespace(c)) spaces++;
+            <span class="kw">else if</span> (Character.isLetter(c)) {
+                <span class="kw">if</span> (Character.isUpperCase(c)) upper++;
+                <span class="kw">else</span> lower++;
+                <span class="ty">char</span> low = Character.toLowerCase(c);
+                <span class="kw">if</span> (<span class="st">"aeiou"</span>.indexOf(low) &gt;= <span class="nm">0</span>) vowels++;
+                <span class="kw">else</span> consonants++;
+            }
+        }
+        System.out.println(<span class="st">"Vowels: "</span>+vowels+<span class="st">", Consonants: "</span>+consonants);
+        System.out.println(<span class="st">"Digits: "</span>+digits+<span class="st">", Spaces: "</span>+spaces);
+        System.out.println(<span class="st">"Uppercase: "</span>+upper+<span class="st">", Lowercase: "</span>+lower);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge be">Easy</span><span class="ct">Palindrome check and reverse string</span></div>
+<div class="algo"><strong>Algorithm:</strong> Reverse using StringBuilder.reverse(). Compare with original for palindrome. For manual check: compare s[i] with s[n-1-i] until mid.</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cl">PalindromeReverse</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        String s = sc.next();
+        String rev = <span class="kw">new</span> StringBuilder(s).reverse().toString();
+        System.out.println(<span class="st">"Reversed: "</span> + rev);
+        System.out.println(<span class="st">"Is palindrome: "</span> + s.equals(rev));
+
+        <span class="cm">// Manual palindrome check</span>
+        <span class="ty">boolean</span> isPalin = <span class="kw">true</span>;
+        <span class="ty">int</span> n = s.length();
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n / <span class="nm">2</span>; i++) {
+            <span class="kw">if</span> (s.charAt(i) != s.charAt(n - <span class="nm">1</span> - i)) {
+                isPalin = <span class="kw">false</span>;
+                <span class="kw">break</span>;
+            }
+        }
+        System.out.println(<span class="st">"Manual check: "</span> + isPalin);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(n)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge be">Easy</span><span class="ct">Anagram check</span></div>
+<div class="algo"><strong>Algorithm:</strong> Two strings are anagrams if their character frequencies match. Build freq[26] for both: increment for s1, decrement for s2. All zeros = anagram.</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cl">AnagramCheck</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        String a = sc.next().toLowerCase();
+        String b = sc.next().toLowerCase();
+
+        <span class="kw">if</span> (a.length() != b.length()) {
+            System.out.println(<span class="st">"Not anagram"</span>);
+            <span class="kw">return</span>;
+        }
+        <span class="ty">int</span>[] freq = <span class="kw">new</span> <span class="ty">int</span>[<span class="nm">26</span>];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; a.length(); i++) {
+            freq[a.charAt(i) - <span class="st">'a'</span>]++;
+            freq[b.charAt(i) - <span class="st">'a'</span>]--;
+        }
+        <span class="kw">for</span> (<span class="ty">int</span> f : freq) {
+            <span class="kw">if</span> (f != <span class="nm">0</span>) {
+                System.out.println(<span class="st">"Not anagram"</span>);
+                <span class="kw">return</span>;
+            }
+        }
+        System.out.println(<span class="st">"Anagram"</span>);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(26) ≈ O(1)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge bb">Basic</span><span class="ct">Check if string is substring, count occurrences</span></div>
+<div class="algo"><strong>Algorithm:</strong> Use built-in contains(), indexOf(), split(). For manual count, slide a window of length pattern.length() and compare substrings.</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cl">SubstringSearch</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        String text = sc.next();
+        String pat = sc.next();
+
+        System.out.println(<span class="st">"Contains: "</span> + text.contains(pat));
+        System.out.println(<span class="st">"First at: "</span> + text.indexOf(pat));
+        System.out.println(<span class="st">"Last at:  "</span> + text.lastIndexOf(pat));
+
+        <span class="cm">// Count occurrences manually</span>
+        <span class="ty">int</span> count = <span class="nm">0</span>, idx = <span class="nm">0</span>;
+        <span class="kw">while</span> ((idx = text.indexOf(pat, idx)) != -<span class="nm">1</span>) {
+            count++;
+            idx += pat.length(); <span class="cm">// use idx++ for overlapping</span>
+        }
+        System.out.println(<span class="st">"Count: "</span> + count);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n * m)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge bb">Basic</span><span class="ct">Convert case, compress string, remove characters</span></div>
+<div class="algo"><strong>Algorithm:</strong> Use StringBuilder for efficient string building. toUpperCase/toLowerCase for case conversion. Compress consecutive repeated characters by counting runs.</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cl">StringOps</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        String s = sc.next();
+
+        <span class="cm">// Case conversion</span>
+        System.out.println(s.toUpperCase());
+        System.out.println(s.toLowerCase());
+
+        <span class="cm">// Remove all spaces</span>
+        System.out.println(s.replaceAll(<span class="st">"\\s+"</span>, <span class="st">""</span>));
+
+        <span class="cm">// Run-length compression: "aaabbc" -> "a3b2c1"</span>
+        StringBuilder sb = <span class="kw">new</span> StringBuilder();
+        <span class="ty">int</span> i = <span class="nm">0</span>;
+        <span class="kw">while</span> (i &lt; s.length()) {
+            <span class="ty">char</span> c = s.charAt(i);
+            <span class="ty">int</span> cnt = <span class="nm">0</span>;
+            <span class="kw">while</span> (i &lt; s.length() &amp;&amp; s.charAt(i) == c) {
+                cnt++; i++;
+            }
+            sb.append(c).append(cnt);
+        }
+        System.out.println(<span class="st">"Compressed: "</span> + sb);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(n)</span></div></div>
+</div>
+
+</div>
+
+<div class="sec" id="search">
+
+<div class="card">
+<div class="ch"><span class="badge be">Easy</span><span class="ct">Linear search — find index</span></div>
+<div class="algo"><strong>Algorithm:</strong> Compare each element to target one by one. Return index on match, -1 if not found. Best for unsorted or small arrays.</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cl">LinearSearch</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        <span class="ty">int</span> n = sc.nextInt(), target = sc.nextInt();
+        <span class="ty">int</span>[] a = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) a[i] = sc.nextInt();
+
+        <span class="ty">int</span> firstIdx = -<span class="nm">1</span>;
+        <span class="ty">int</span> occurrences = <span class="nm">0</span>;
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) {
+            <span class="kw">if</span> (a[i] == target) {
+                <span class="kw">if</span> (firstIdx == -<span class="nm">1</span>) firstIdx = i;
+                occurrences++;
+            }
+        }
+        System.out.println(<span class="st">"First index: "</span> + firstIdx);
+        System.out.println(<span class="st">"Occurrences: "</span> + occurrences);
+        System.out.println(<span class="st">"Found: "</span> + (firstIdx != -<span class="nm">1</span>));
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge bb">Basic</span><span class="ct">Binary search — exact match</span></div>
+<div class="algo"><strong>Algorithm:</strong> Array must be sorted. Compare target with middle element. If smaller, search left half; if larger, search right half. Repeat until found or range is empty.</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cl">BinarySearch</span> {
+    <span class="kw">static int</span> <span class="fn">binarySearch</span>(<span class="ty">int</span>[] a, <span class="ty">int</span> target) {
+        <span class="ty">int</span> lo = <span class="nm">0</span>, hi = a.length - <span class="nm">1</span>;
+        <span class="kw">while</span> (lo &lt;= hi) {
+            <span class="ty">int</span> mid = lo + (hi - lo) / <span class="nm">2</span>;
+            <span class="kw">if</span> (a[mid] == target) <span class="kw">return</span> mid;
+            <span class="kw">else if</span> (a[mid] &lt; target) lo = mid + <span class="nm">1</span>;
+            <span class="kw">else</span> hi = mid - <span class="nm">1</span>;
+        }
+        <span class="kw">return</span> -<span class="nm">1</span>;
+    }
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        <span class="ty">int</span> n = sc.nextInt(), target = sc.nextInt();
+        <span class="ty">int</span>[] a = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) a[i] = sc.nextInt();
+        Arrays.sort(a);
+        <span class="ty">int</span> idx = <span class="fn">binarySearch</span>(a, target);
+        System.out.println(idx == -<span class="nm">1</span> ? <span class="st">"Not found"</span> : <span class="st">"Found at: "</span> + idx);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(log n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge bb">Basic</span><span class="ct">Binary search — lower and upper bound</span></div>
+<div class="algo"><strong>Algorithm:</strong> Lower bound = first index where a[i] >= target. Upper bound = first index where a[i] > target. Both use binary search. Count of target = upperBound - lowerBound.</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cl">LowerUpperBound</span> {
+    <span class="kw">static int</span> <span class="fn">lowerBound</span>(<span class="ty">int</span>[] a, <span class="ty">int</span> x) {
+        <span class="ty">int</span> lo = <span class="nm">0</span>, hi = a.length;
+        <span class="kw">while</span> (lo &lt; hi) {
+            <span class="ty">int</span> mid = (lo + hi) / <span class="nm">2</span>;
+            <span class="kw">if</span> (a[mid] &lt; x) lo = mid + <span class="nm">1</span>;
+            <span class="kw">else</span> hi = mid;
+        }
+        <span class="kw">return</span> lo;
+    }
+    <span class="kw">static int</span> <span class="fn">upperBound</span>(<span class="ty">int</span>[] a, <span class="ty">int</span> x) {
+        <span class="ty">int</span> lo = <span class="nm">0</span>, hi = a.length;
+        <span class="kw">while</span> (lo &lt; hi) {
+            <span class="ty">int</span> mid = (lo + hi) / <span class="nm">2</span>;
+            <span class="kw">if</span> (a[mid] &lt;= x) lo = mid + <span class="nm">1</span>;
+            <span class="kw">else</span> hi = mid;
+        }
+        <span class="kw">return</span> lo;
+    }
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        <span class="ty">int</span> n = sc.nextInt(), x = sc.nextInt();
+        <span class="ty">int</span>[] a = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) a[i] = sc.nextInt();
+        Arrays.sort(a);
+        <span class="ty">int</span> lb = <span class="fn">lowerBound</span>(a, x);
+        <span class="ty">int</span> ub = <span class="fn">upperBound</span>(a, x);
+        System.out.println(<span class="st">"Lower bound index: "</span> + lb);
+        System.out.println(<span class="st">"Upper bound index: "</span> + ub);
+        System.out.println(<span class="st">"Count of "</span> + x + <span class="st">": "</span> + (ub - lb));
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n log n + log n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+</div>
+
+</div>
+
+<div class="sec" id="twop">
+
+<div class="card">
+<div class="ch"><span class="badge be">Easy</span><span class="ct">Reverse array in place</span></div>
+<div class="algo"><strong>Algorithm:</strong> Left pointer at 0, right at n-1. Swap a[l] and a[r], then move both inward. Stop when l >= r.</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cl">ReverseArray</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        <span class="ty">int</span> n = sc.nextInt();
+        <span class="ty">int</span>[] a = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) a[i] = sc.nextInt();
+
+        <span class="ty">int</span> l = <span class="nm">0</span>, r = n - <span class="nm">1</span>;
+        <span class="kw">while</span> (l &lt; r) {
+            <span class="ty">int</span> tmp = a[l];
+            a[l] = a[r];
+            a[r] = tmp;
+            l++; r--;
+        }
+        System.out.println(Arrays.toString(a));
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge be">Easy</span><span class="ct">Pair with given sum (sorted array)</span></div>
+<div class="algo"><strong>Algorithm:</strong> Sort array. Left pointer at start, right at end. If sum matches target = found. Sum too small = move left right. Sum too large = move right left.</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cl">PairSum</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        <span class="ty">int</span> n = sc.nextInt(), target = sc.nextInt();
+        <span class="ty">int</span>[] a = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) a[i] = sc.nextInt();
+
+        Arrays.sort(a);
+        <span class="ty">int</span> l = <span class="nm">0</span>, r = n - <span class="nm">1</span>;
+        <span class="ty">boolean</span> found = <span class="kw">false</span>;
+        <span class="kw">while</span> (l &lt; r) {
+            <span class="ty">int</span> s = a[l] + a[r];
+            <span class="kw">if</span> (s == target) {
+                System.out.println(<span class="st">"Pair: "</span> + a[l] + <span class="st">", "</span> + a[r]);
+                found = <span class="kw">true</span>;
+                l++; r--;
+            } <span class="kw">else if</span> (s &lt; target) l++;
+            <span class="kw">else</span> r--;
+        }
+        <span class="kw">if</span> (!found) System.out.println(<span class="st">"No pair found"</span>);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n log n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge bb">Basic</span><span class="ct">Rotate array by k positions</span></div>
+<div class="algo"><strong>Algorithm:</strong> Three-reversal trick — reverse full array, reverse first k, reverse rest. All O(n) time, O(1) space. Handle k > n with k %= n.</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cl">RotateArray</span> {
+    <span class="kw">static void</span> <span class="fn">reverse</span>(<span class="ty">int</span>[] a, <span class="ty">int</span> l, <span class="ty">int</span> r) {
+        <span class="kw">while</span> (l &lt; r) {
+            <span class="ty">int</span> tmp = a[l]; a[l] = a[r]; a[r] = tmp;
+            l++; r--;
+        }
+    }
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        <span class="ty">int</span> n = sc.nextInt(), k = sc.nextInt();
+        <span class="ty">int</span>[] a = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) a[i] = sc.nextInt();
+
+        k %= n;
+        <span class="cm">// Rotate right by k</span>
+        <span class="fn">reverse</span>(a, <span class="nm">0</span>, n - <span class="nm">1</span>);
+        <span class="fn">reverse</span>(a, <span class="nm">0</span>, k - <span class="nm">1</span>);
+        <span class="fn">reverse</span>(a, k, n - <span class="nm">1</span>);
+        System.out.println(<span class="st">"After right rotate by "</span> + k + <span class="st">": "</span> + Arrays.toString(a));
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge bb">Basic</span><span class="ct">Check pair with given difference</span></div>
+<div class="algo"><strong>Algorithm:</strong> Sort array. For each element a[r], find if a[r] - diff exists using binary search or by advancing l pointer since array is sorted.</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cl">PairDifference</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        <span class="ty">int</span> n = sc.nextInt(), diff = sc.nextInt();
+        <span class="ty">int</span>[] a = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) a[i] = sc.nextInt();
+
+        Arrays.sort(a);
+        <span class="ty">int</span> l = <span class="nm">0</span>, r = <span class="nm">1</span>;
+        <span class="ty">boolean</span> found = <span class="kw">false</span>;
+        <span class="kw">while</span> (r &lt; n) {
+            <span class="ty">int</span> d = a[r] - a[l];
+            <span class="kw">if</span> (d == diff &amp;&amp; l != r) {
+                System.out.println(<span class="st">"Pair: "</span> + a[l] + <span class="st">", "</span> + a[r]);
+                found = <span class="kw">true</span>;
+                l++; r++;
+            } <span class="kw">else if</span> (d &lt; diff) r++;
+            <span class="kw">else</span> l++;
+            <span class="kw">if</span> (l == r) r++;
+        }
+        <span class="kw">if</span> (!found) System.out.println(<span class="st">"No pair found"</span>);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n log n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+</div>
+
+</div>
+
+<div class="sec" id="slide">
+
+<div class="card">
+<div class="ch"><span class="badge be">Easy</span><span class="ct">Maximum sum subarray of size k (fixed window)</span></div>
+<div class="algo"><strong>Algorithm:</strong> Build sum of first k elements. Slide window: add next element, remove first element of old window. Track maximum sum seen.</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cl">MaxSumWindowK</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        <span class="ty">int</span> n = sc.nextInt(), k = sc.nextInt();
+        <span class="ty">int</span>[] a = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) a[i] = sc.nextInt();
+
+        <span class="ty">long</span> windowSum = <span class="nm">0</span>;
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; k; i++) windowSum += a[i];
+        <span class="ty">long</span> maxSum = windowSum;
+        <span class="ty">int</span> bestStart = <span class="nm">0</span>;
+
+        <span class="kw">for</span> (<span class="ty">int</span> i = k; i &lt; n; i++) {
+            windowSum += a[i] - a[i - k];
+            <span class="kw">if</span> (windowSum &gt; maxSum) {
+                maxSum = windowSum;
+                bestStart = i - k + <span class="nm">1</span>;
+            }
+        }
+        System.out.println(<span class="st">"Max sum: "</span> + maxSum);
+        System.out.println(<span class="st">"Subarray: "</span> + Arrays.toString(
+            Arrays.copyOfRange(a, bestStart, bestStart + k)));
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge be">Easy</span><span class="ct">Minimum length subarray with sum >= S</span></div>
+<div class="algo"><strong>Algorithm:</strong> Expand right pointer adding elements. When windowSum >= S, record length and shrink from left. Variable-size window — find minimum length satisfying condition.</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cl">MinLenSubarraySum</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        <span class="ty">int</span> n = sc.nextInt(), S = sc.nextInt();
+        <span class="ty">int</span>[] a = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) a[i] = sc.nextInt();
+
+        <span class="ty">int</span> minLen = Integer.MAX_VALUE;
+        <span class="ty">long</span> windowSum = <span class="nm">0</span>;
+        <span class="ty">int</span> l = <span class="nm">0</span>;
+        <span class="kw">for</span> (<span class="ty">int</span> r = <span class="nm">0</span>; r &lt; n; r++) {
+            windowSum += a[r];
+            <span class="kw">while</span> (windowSum &gt;= S) {
+                minLen = Math.min(minLen, r - l + <span class="nm">1</span>);
+                windowSum -= a[l++];
+            }
+        }
+        System.out.println(minLen == Integer.MAX_VALUE
+            ? <span class="st">"No subarray found"</span>
+            : <span class="st">"Min length: "</span> + minLen);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge bb">Basic</span><span class="ct">Longest subarray with all same elements</span></div>
+<div class="algo"><strong>Algorithm:</strong> Expand right. If a[r] != a[l], reset window start to r. Track maximum window size seen. Single pass.</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cl">LongestSameSubarray</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        <span class="ty">int</span> n = sc.nextInt();
+        <span class="ty">int</span>[] a = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) a[i] = sc.nextInt();
+
+        <span class="ty">int</span> maxLen = <span class="nm">1</span>, curLen = <span class="nm">1</span>;
+        <span class="ty">int</span> bestVal = a[<span class="nm">0</span>];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">1</span>; i &lt; n; i++) {
+            <span class="kw">if</span> (a[i] == a[i - <span class="nm">1</span>]) {
+                curLen++;
+            } <span class="kw">else</span> {
+                curLen = <span class="nm">1</span>;
+            }
+            <span class="kw">if</span> (curLen &gt; maxLen) {
+                maxLen = curLen;
+                bestVal = a[i];
+            }
+        }
+        System.out.println(<span class="st">"Max length: "</span> + maxLen + <span class="st">", element: "</span> + bestVal);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge bb">Basic</span><span class="ct">Count distinct elements in every window of size k</span></div>
+<div class="algo"><strong>Algorithm:</strong> Use a HashMap to track element frequencies in current window. Size of map = distinct count. Slide window: add right element, remove left element (delete from map if freq drops to 0).</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cl">DistinctInWindow</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        <span class="ty">int</span> n = sc.nextInt(), k = sc.nextInt();
+        <span class="ty">int</span>[] a = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) a[i] = sc.nextInt();
+
+        Map&lt;Integer, Integer&gt; freq = <span class="kw">new</span> HashMap&lt;&gt;();
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; k; i++)
+            freq.put(a[i], freq.getOrDefault(a[i], <span class="nm">0</span>) + <span class="nm">1</span>);
+        System.out.print(<span class="st">"Window [0,"</span>+(k-<span class="nm">1</span>)+<span class="st">"] distinct: "</span>+freq.size()+<span class="st">"\n"</span>);
+
+        <span class="kw">for</span> (<span class="ty">int</span> i = k; i &lt; n; i++) {
+            freq.put(a[i], freq.getOrDefault(a[i], <span class="nm">0</span>) + <span class="nm">1</span>);
+            <span class="ty">int</span> outgoing = a[i - k];
+            freq.put(outgoing, freq.get(outgoing) - <span class="nm">1</span>);
+            <span class="kw">if</span> (freq.get(outgoing) == <span class="nm">0</span>) freq.remove(outgoing);
+            System.out.print(<span class="st">"Window ["</span>+(i-k+<span class="nm">1</span>)+<span class="st">","</span>+i+<span class="st">"] distinct: "</span>+freq.size()+<span class="st">"\n"</span>);
+        }
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(k)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge bb">Basic</span><span class="ct">Longest substring without repeating characters</span></div>
+<div class="algo"><strong>Algorithm:</strong> Use a HashSet to track characters in current window. If a[r] already in set, shrink from left until removed. Expand right each step. Track maximum window size.</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cl">LongestUniqueSubstring</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        String s = sc.next();
+        <span class="ty">int</span> n = s.length();
+        Set&lt;Character&gt; window = <span class="kw">new</span> HashSet&lt;&gt;();
+        <span class="ty">int</span> l = <span class="nm">0</span>, maxLen = <span class="nm">0</span>, bestL = <span class="nm">0</span>;
+
+        <span class="kw">for</span> (<span class="ty">int</span> r = <span class="nm">0</span>; r &lt; n; r++) {
+            <span class="kw">while</span> (window.contains(s.charAt(r)))
+                window.remove(s.charAt(l++));
+            window.add(s.charAt(r));
+            <span class="kw">if</span> (r - l + <span class="nm">1</span> &gt; maxLen) {
+                maxLen = r - l + <span class="nm">1</span>;
+                bestL = l;
+            }
+        }
+        System.out.println(<span class="st">"Max length: "</span> + maxLen);
+        System.out.println(<span class="st">"Substring: "</span> + s.substring(bestL, bestL + maxLen));
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(min(n,alphabet))</span></div></div>
+</div>
+
+</div>
+</div>
+
+<script>
+function

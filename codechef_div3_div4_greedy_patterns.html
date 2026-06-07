@@ -1,0 +1,864 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.root{background:#0f1117;color:#e2e8f0;font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;padding:10%;min-height:100vh}
+.pg-title{font-size:21px;font-weight:500;color:#38bdf8;margin-bottom:4px}
+.pg-sub{font-size:13px;color:#475569;margin-bottom:10px}
+.map-wrap{background:#131720;border:0.5px solid #1e2535;border-radius:12px;padding:16px;margin-bottom:24px;overflow-x:auto}
+.map-wrap svg{display:block;margin:auto}
+.tabs{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:22px}
+.tab{background:#161b27;border:0.5px solid #232b3e;border-radius:8px;padding:6px 13px;font-size:12.5px;color:#94a3b8;cursor:pointer;transition:all .15s}
+.tab:hover{background:#1b2436;color:#38bdf8;border-color:#0369a1}
+.tab.active{background:#0c2340;color:#38bdf8;border-color:#0369a1}
+.sec{display:none}.sec.active{display:block}
+.card{background:#161b27;border:0.5px solid #1e2535;border-radius:12px;padding:18px 22px;margin-bottom:18px}
+.ch{display:flex;align-items:center;gap:10px;margin-bottom:11px}
+.badge{font-size:11px;font-weight:500;padding:3px 9px;border-radius:6px}
+.b-easy{background:#0c2d1a;color:#4ade80}
+.b-med{background:#0c2340;color:#38bdf8}
+.ctitle{font-size:15px;font-weight:500;color:#e2e8f0}
+.algo{background:#0a0d15;border-left:3px solid #0369a1;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:13px;font-size:13px;color:#94a3b8;line-height:1.65}
+.algo strong{color:#38bdf8;font-weight:500}
+pre{background:#080b12;border:0.5px solid #1a2030;border-radius:8px;padding:13px 15px;font-family:'Fira Code','Cascadia Code',monospace;font-size:12px;line-height:1.8;color:#cdd6f4;overflow-x:auto;white-space:pre}
+.kw{color:#c084fc}.ty{color:#7dd3fc}.fn{color:#6ee7b7}.cm{color:#3d4f6b;font-style:italic}.str{color:#a6e3a1}.num{color:#fb923c}.cls{color:#fbbf24}
+.cx{display:flex;gap:12px;margin-top:11px;flex-wrap:wrap}
+.chip{background:#0f1421;border:0.5px solid #1e2535;border-radius:6px;padding:3px 11px;font-size:12px;color:#64748b}
+.chip span{color:#f9a8d4;font-weight:500}
+.tip{background:#0c1c2e;border:0.5px solid #1d3d61;border-radius:8px;padding:9px 13px;font-size:12.5px;color:#60a5fa;margin-top:10px}
+</style>
+
+<div class="root">
+<h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">CodeChef Div3 and Div4 Greedy Patterns with complete Java code</h2>
+<p class="pg-title">CodeChef Div 3 + Div 4 — Greedy Patterns</p>
+<p class="pg-sub">Complete Java solutions with algorithms — all major greedy patterns</p>
+
+<div class="map-wrap">
+<svg viewBox="0 0 780 310" width="760" xmlns="http://www.w3.org/2000/svg" aria-label="Greedy pattern mind map">
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#334155"/>
+    </marker>
+  </defs>
+  <!-- center -->
+  <rect x="305" y="125" width="170" height="44" rx="8" fill="#0c2340" stroke="#0369a1" stroke-width="1"/>
+  <text x="390" y="142" text-anchor="middle" fill="#38bdf8" font-size="13" font-weight="500">Greedy</text>
+  <text x="390" y="158" text-anchor="middle" fill="#60a5fa" font-size="11">Div 3 + Div 4</text>
+  <!-- branches -->
+  <line x1="305" y1="147" x2="195" y2="60" stroke="#334155" stroke-width="1" marker-end="url(#arr)"/>
+  <rect x="80" y="36" width="110" height="34" rx="7" fill="#1a1d2e" stroke="#334155" stroke-width="0.5"/>
+  <text x="135" y="53" text-anchor="middle" fill="#94a3b8" font-size="11.5">Sorting + Pick</text>
+  <text x="135" y="65" text-anchor="middle" fill="#64748b" font-size="10">min/max greedily</text>
+
+  <line x1="305" y1="136" x2="190" y2="110" stroke="#334155" stroke-width="1" marker-end="url(#arr)"/>
+  <rect x="68" y="97" width="118" height="34" rx="7" fill="#1a1d2e" stroke="#334155" stroke-width="0.5"/>
+  <text x="127" y="114" text-anchor="middle" fill="#94a3b8" font-size="11.5">Interval Scheduling</text>
+  <text x="127" y="126" text-anchor="middle" fill="#64748b" font-size="10">earliest deadline</text>
+
+  <line x1="305" y1="147" x2="182" y2="170" stroke="#334155" stroke-width="1" marker-end="url(#arr)"/>
+  <rect x="60" y="157" width="118" height="34" rx="7" fill="#1a1d2e" stroke="#334155" stroke-width="0.5"/>
+  <text x="119" y="174" text-anchor="middle" fill="#94a3b8" font-size="11.5">Coin / Minimum</text>
+  <text x="119" y="186" text-anchor="middle" fill="#64748b" font-size="10">Change greedy</text>
+
+  <line x1="305" y1="158" x2="185" y2="228" stroke="#334155" stroke-width="1" marker-end="url(#arr)"/>
+  <rect x="60" y="217" width="120" height="34" rx="7" fill="#1a1d2e" stroke="#334155" stroke-width="0.5"/>
+  <text x="120" y="234" text-anchor="middle" fill="#94a3b8" font-size="11.5">Activity Selection</text>
+  <text x="120" y="246" text-anchor="middle" fill="#64748b" font-size="10">max non-overlap</text>
+
+  <line x1="305" y1="158" x2="193" y2="272" stroke="#334155" stroke-width="1" marker-end="url(#arr)"/>
+  <rect x="60" y="261" width="128" height="34" rx="7" fill="#1a1d2e" stroke="#334155" stroke-width="0.5"/>
+  <text x="124" y="278" text-anchor="middle" fill="#94a3b8" font-size="11.5">Assign Min Cost</text>
+  <text x="124" y="290" text-anchor="middle" fill="#64748b" font-size="10">pair smallest+largest</text>
+
+  <!-- right -->
+  <line x1="475" y1="147" x2="592" y2="60" stroke="#334155" stroke-width="1" marker-end="url(#arr)"/>
+  <rect x="592" y="36" width="116" height="34" rx="7" fill="#1a1d2e" stroke="#334155" stroke-width="0.5"/>
+  <text x="650" y="53" text-anchor="middle" fill="#94a3b8" font-size="11.5">Maximize Sum</text>
+  <text x="650" y="65" text-anchor="middle" fill="#64748b" font-size="10">pick top-k elements</text>
+
+  <line x1="475" y1="136" x2="598" y2="110" stroke="#334155" stroke-width="1" marker-end="url(#arr)"/>
+  <rect x="598" y="97" width="116" height="34" rx="7" fill="#1a1d2e" stroke="#334155" stroke-width="0.5"/>
+  <text x="656" y="114" text-anchor="middle" fill="#94a3b8" font-size="11.5">Minimum Ops</text>
+  <text x="656" y="126" text-anchor="middle" fill="#64748b" font-size="10">reduce to target</text>
+
+  <line x1="475" y1="147" x2="605" y2="170" stroke="#334155" stroke-width="1" marker-end="url(#arr)"/>
+  <rect x="605" y="157" width="116" height="34" rx="7" fill="#1a1d2e" stroke="#334155" stroke-width="0.5"/>
+  <text x="663" y="174" text-anchor="middle" fill="#94a3b8" font-size="11.5">Two Array Pairing</text>
+  <text x="663" y="186" text-anchor="middle" fill="#64748b" font-size="10">sort opposite order</text>
+
+  <line x1="475" y1="158" x2="602" y2="228" stroke="#334155" stroke-width="1" marker-end="url(#arr)"/>
+  <rect x="602" y="217" width="116" height="34" rx="7" fill="#1a1d2e" stroke="#334155" stroke-width="0.5"/>
+  <text x="660" y="234" text-anchor="middle" fill="#94a3b8" font-size="11.5">String Greedy</text>
+  <text x="660" y="246" text-anchor="middle" fill="#64748b" font-size="10">lex smallest arrange</text>
+
+  <line x1="475" y1="158" x2="600" y2="272" stroke="#334155" stroke-width="1" marker-end="url(#arr)"/>
+  <rect x="600" y="261" width="118" height="34" rx="7" fill="#1a1d2e" stroke="#334155" stroke-width="0.5"/>
+  <text x="659" y="278" text-anchor="middle" fill="#94a3b8" font-size="11.5">Gas / Jump Game</text>
+  <text x="659" y="290" text-anchor="middle" fill="#64748b" font-size="10">circular feasibility</text>
+</svg>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="sw('sort')">Sorting + Pick</button>
+  <button class="tab" onclick="sw('interval')">Interval Scheduling</button>
+  <button class="tab" onclick="sw('coin')">Coin / Min Ops</button>
+  <button class="tab" onclick="sw('activity')">Activity Selection</button>
+  <button class="tab" onclick="sw('assign')">Min Cost Assign</button>
+  <button class="tab" onclick="sw('maxsum')">Maximize Sum</button>
+  <button class="tab" onclick="sw('pair')">Two Array Pairing</button>
+  <button class="tab" onclick="sw('string')">String Greedy</button>
+  <button class="tab" onclick="sw('gas')">Gas / Jump Game</button>
+  <button class="tab" onclick="sw('extra')">More Patterns</button>
+</div>
+
+<!-- SORTING + PICK -->
+<div class="sec active" id="sort">
+<div class="card">
+<div class="ch"><span class="badge b-easy">Easy</span><span class="ctitle">1. Pick largest K elements to maximize sum</span></div>
+<div class="algo"><strong>Algorithm:</strong> Sort descending. Sum first K elements. The greedy choice is always to pick the largest available element first.</div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">import</span> java.util.Scanner;
+
+<span class="kw">public class</span> <span class="cls">MaxSumK</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> <span class="cls">Scanner</span>(System.in);
+        <span class="ty">int</span> n = sc.nextInt(), k = sc.nextInt();
+        <span class="ty">int</span>[] a = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; n; i++) a[i] = sc.nextInt();
+
+        Arrays.sort(a);   <span class="cm">// ascending</span>
+        <span class="ty">long</span> sum = <span class="num">0</span>;
+        <span class="cm">// pick last k (largest)</span>
+        <span class="kw">for</span> (<span class="ty">int</span> i = n - k; i &lt; n; i++) sum += a[i];
+
+        System.out.println(sum);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n log n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+<div class="tip">Div 4 variant: pick smallest k to minimize sum — take first k after sorting ascending.</div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge b-easy">Easy</span><span class="ctitle">2. Minimum cost to buy exactly one item from each group</span></div>
+<div class="algo"><strong>Algorithm:</strong> Sort each group. Greedily pick the cheapest (index 0) from every group. Sum them up.</div>
+<pre><span class="kw">import</span> java.util.*;
+
+<span class="kw">public class</span> <span class="cls">MinCostGroups</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> <span class="cls">Scanner</span>(System.in);
+        <span class="ty">int</span> g = sc.nextInt();   <span class="cm">// number of groups</span>
+        <span class="ty">long</span> total = <span class="num">0</span>;
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; g; i++) {
+            <span class="ty">int</span> m = sc.nextInt();
+            <span class="ty">int</span>[] prices = <span class="kw">new</span> <span class="ty">int</span>[m];
+            <span class="kw">for</span> (<span class="ty">int</span> j = <span class="num">0</span>; j &lt; m; j++) prices[j] = sc.nextInt();
+            Arrays.sort(prices);
+            total += prices[<span class="num">0</span>]; <span class="cm">// cheapest in group</span>
+        }
+        System.out.println(total);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(g * m log m)</span></div><div class="chip">Space <span>O(m)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge b-med">Med</span><span class="ctitle">3. Minimum difference between max and min after K removals</span></div>
+<div class="algo"><strong>Algorithm:</strong> Sort. Use sliding window of size (n−k). Minimum over all windows of (window[last] − window[first]).</div>
+<pre><span class="kw">import</span> java.util.*;
+
+<span class="kw">public class</span> <span class="cls">MinDiffKRemove</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> <span class="cls">Scanner</span>(System.in);
+        <span class="ty">int</span> n = sc.nextInt(), k = sc.nextInt();
+        <span class="ty">int</span>[] a = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; n; i++) a[i] = sc.nextInt();
+        Arrays.sort(a);
+
+        <span class="ty">int</span> window = n - k;
+        <span class="ty">int</span> minDiff = Integer.MAX_VALUE;
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i + window - <span class="num">1</span> &lt; n; i++) {
+            minDiff = Math.min(minDiff,
+                a[i + window - <span class="num">1</span>] - a[i]);
+        }
+        System.out.println(minDiff);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n log n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+</div>
+</div>
+
+<!-- INTERVAL SCHEDULING -->
+<div class="sec" id="interval">
+<div class="card">
+<div class="ch"><span class="badge b-med">Med</span><span class="ctitle">1. Merge overlapping intervals</span></div>
+<div class="algo"><strong>Algorithm:</strong> Sort by start. Walk through: if current start ≤ last end, merge by extending end. Otherwise push new interval.</div>
+<pre><span class="kw">import</span> java.util.*;
+
+<span class="kw">public class</span> <span class="cls">MergeIntervals</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> <span class="cls">Scanner</span>(System.in);
+        <span class="ty">int</span> n = sc.nextInt();
+        <span class="ty">int</span>[][] intervals = <span class="kw">new</span> <span class="ty">int</span>[n][<span class="num">2</span>];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; n; i++) {
+            intervals[i][<span class="num">0</span>] = sc.nextInt();
+            intervals[i][<span class="num">1</span>] = sc.nextInt();
+        }
+        Arrays.sort(intervals, (a, b) -> a[<span class="num">0</span>] - b[<span class="num">0</span>]);
+
+        List&lt;<span class="ty">int</span>[]&gt; res = <span class="kw">new</span> ArrayList&lt;&gt;();
+        <span class="kw">for</span> (<span class="ty">int</span>[] iv : intervals) {
+            <span class="kw">if</span> (res.isEmpty() ||
+                res.get(res.size()-<span class="num">1</span>)[<span class="num">1</span>] &lt; iv[<span class="num">0</span>]) {
+                res.add(<span class="kw">new</span> <span class="ty">int</span>[]{iv[<span class="num">0</span>], iv[<span class="num">1</span>]});
+            } <span class="kw">else</span> {
+                res.get(res.size()-<span class="num">1</span>)[<span class="num">1</span>] =
+                    Math.max(res.get(res.size()-<span class="num">1</span>)[<span class="num">1</span>], iv[<span class="num">1</span>]);
+            }
+        }
+        System.out.println(<span class="str">"Merged count: "</span> + res.size());
+        <span class="kw">for</span> (<span class="ty">int</span>[] r : res)
+            System.out.println(r[<span class="num">0</span>] + <span class="str">" "</span> + r[<span class="num">1</span>]);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n log n)</span></div><div class="chip">Space <span>O(n)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge b-med">Med</span><span class="ctitle">2. Minimum number of meeting rooms needed</span></div>
+<div class="algo"><strong>Algorithm:</strong> Sort start times. Use a min-heap of end times. For each meeting, if its start ≥ heap top, reuse room (poll). Otherwise add room. Heap size = rooms needed.</div>
+<pre><span class="kw">import</span> java.util.*;
+
+<span class="kw">public class</span> <span class="cls">MeetingRooms</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> <span class="cls">Scanner</span>(System.in);
+        <span class="ty">int</span> n = sc.nextInt();
+        <span class="ty">int</span>[][] meet = <span class="kw">new</span> <span class="ty">int</span>[n][<span class="num">2</span>];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; n; i++) {
+            meet[i][<span class="num">0</span>] = sc.nextInt();
+            meet[i][<span class="num">1</span>] = sc.nextInt();
+        }
+        Arrays.sort(meet, (a, b) -> a[<span class="num">0</span>] - b[<span class="num">0</span>]);
+
+        PriorityQueue&lt;Integer&gt; heap =
+            <span class="kw">new</span> PriorityQueue&lt;&gt;(); <span class="cm">// min-heap of end times</span>
+        <span class="kw">for</span> (<span class="ty">int</span>[] m : meet) {
+            <span class="kw">if</span> (!heap.isEmpty() && heap.peek() &lt;= m[<span class="num">0</span>])
+                heap.poll(); <span class="cm">// reuse room</span>
+            heap.offer(m[<span class="num">1</span>]);
+        }
+        System.out.println(<span class="str">"Rooms needed: "</span> + heap.size());
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n log n)</span></div><div class="chip">Space <span>O(n)</span></div></div>
+</div>
+</div>
+
+<!-- COIN / MIN OPS -->
+<div class="sec" id="coin">
+<div class="card">
+<div class="ch"><span class="badge b-easy">Easy</span><span class="ctitle">1. Minimum coins to make amount (standard denominations)</span></div>
+<div class="algo"><strong>Algorithm:</strong> Sort coins descending. Greedily use the largest coin that fits. Subtract from amount, repeat. Works only for standard coin systems (not arbitrary denominations — use DP for those).</div>
+<pre><span class="kw">import</span> java.util.*;
+
+<span class="kw">public class</span> <span class="cls">MinCoins</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> <span class="cls">Scanner</span>(System.in);
+        <span class="ty">int</span>[] coins = {<span class="num">1</span>, <span class="num">2</span>, <span class="num">5</span>, <span class="num">10</span>, <span class="num">20</span>, <span class="num">50</span>, <span class="num">100</span>, <span class="num">500</span>, <span class="num">2000</span>};
+        <span class="ty">int</span> amount = sc.nextInt();
+        <span class="ty">int</span> count = <span class="num">0</span>;
+
+        <span class="kw">for</span> (<span class="ty">int</span> i = coins.length - <span class="num">1</span>; i &gt;= <span class="num">0</span> && amount &gt; <span class="num">0</span>; i--) {
+            <span class="kw">if</span> (coins[i] &lt;= amount) {
+                <span class="ty">int</span> use = amount / coins[i];
+                count += use;
+                amount -= use * coins[i];
+            }
+        }
+        System.out.println(<span class="str">"Minimum coins: "</span> + count);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(amount)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+<div class="tip">Note: for arbitrary coin sets, greedy fails — use DP. Div 3/4 always gives canonical coins.</div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge b-easy">Easy</span><span class="ctitle">2. Minimum operations to make array elements equal</span></div>
+<div class="algo"><strong>Algorithm:</strong> The optimal target is the median. Cost = sum of |a[i] − median|. Sort array, pick middle element as target, compute total moves.</div>
+<pre><span class="kw">import</span> java.util.*;
+
+<span class="kw">public class</span> <span class="cls">MinOpsEqual</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> <span class="cls">Scanner</span>(System.in);
+        <span class="ty">int</span> n = sc.nextInt();
+        <span class="ty">int</span>[] a = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; n; i++) a[i] = sc.nextInt();
+        Arrays.sort(a);
+
+        <span class="ty">int</span> median = a[n / <span class="num">2</span>];
+        <span class="ty">long</span> ops = <span class="num">0</span>;
+        <span class="kw">for</span> (<span class="ty">int</span> x : a) ops += Math.abs(x - median);
+
+        System.out.println(<span class="str">"Min operations: "</span> + ops);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n log n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge b-med">Med</span><span class="ctitle">3. Minimum increments to make array strictly increasing</span></div>
+<div class="algo"><strong>Algorithm:</strong> Walk left to right. If a[i] ≤ a[i−1], set a[i] = a[i−1] + 1 and add (a[i−1]+1 − original) to answer.</div>
+<pre><span class="kw">import</span> java.util.*;
+
+<span class="kw">public class</span> <span class="cls">MinIncStrictly</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> <span class="cls">Scanner</span>(System.in);
+        <span class="ty">int</span> n = sc.nextInt();
+        <span class="ty">long</span>[] a = <span class="kw">new</span> <span class="ty">long</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; n; i++) a[i] = sc.nextLong();
+
+        <span class="ty">long</span> ops = <span class="num">0</span>;
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">1</span>; i &lt; n; i++) {
+            <span class="kw">if</span> (a[i] &lt;= a[i - <span class="num">1</span>]) {
+                <span class="ty">long</span> needed = a[i - <span class="num">1</span>] + <span class="num">1</span>;
+                ops += needed - a[i];
+                a[i] = needed;
+            }
+        }
+        System.out.println(<span class="str">"Min increments: "</span> + ops);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+</div>
+</div>
+
+<!-- ACTIVITY SELECTION -->
+<div class="sec" id="activity">
+<div class="card">
+<div class="ch"><span class="badge b-med">Med</span><span class="ctitle">1. Maximum non-overlapping activities (classic)</span></div>
+<div class="algo"><strong>Algorithm:</strong> Sort by end time. Greedily select activity if its start ≥ last selected end. This always yields the maximum number of activities.</div>
+<pre><span class="kw">import</span> java.util.*;
+
+<span class="kw">public class</span> <span class="cls">ActivitySelection</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> <span class="cls">Scanner</span>(System.in);
+        <span class="ty">int</span> n = sc.nextInt();
+        <span class="ty">int</span>[][] act = <span class="kw">new</span> <span class="ty">int</span>[n][<span class="num">2</span>];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; n; i++) {
+            act[i][<span class="num">0</span>] = sc.nextInt(); <span class="cm">// start</span>
+            act[i][<span class="num">1</span>] = sc.nextInt(); <span class="cm">// end</span>
+        }
+        <span class="cm">// sort by end time</span>
+        Arrays.sort(act, (a, b) -> a[<span class="num">1</span>] - b[<span class="num">1</span>]);
+
+        <span class="ty">int</span> count = <span class="num">0</span>, lastEnd = -<span class="num">1</span>;
+        <span class="kw">for</span> (<span class="ty">int</span>[] a : act) {
+            <span class="kw">if</span> (a[<span class="num">0</span>] >= lastEnd) {
+                count++;
+                lastEnd = a[<span class="num">1</span>];
+            }
+        }
+        System.out.println(<span class="str">"Max activities: "</span> + count);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n log n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge b-med">Med</span><span class="ctitle">2. Minimum intervals to remove so none overlap</span></div>
+<div class="algo"><strong>Algorithm:</strong> Sort by end time. Count max non-overlapping (activity selection). Answer = n − max non-overlapping.</div>
+<pre><span class="kw">import</span> java.util.*;
+
+<span class="kw">public class</span> <span class="cls">MinRemoveNoOverlap</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> <span class="cls">Scanner</span>(System.in);
+        <span class="ty">int</span> n = sc.nextInt();
+        <span class="ty">int</span>[][] iv = <span class="kw">new</span> <span class="ty">int</span>[n][<span class="num">2</span>];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; n; i++) {
+            iv[i][<span class="num">0</span>] = sc.nextInt();
+            iv[i][<span class="num">1</span>] = sc.nextInt();
+        }
+        Arrays.sort(iv, (a, b) -> a[<span class="num">1</span>] - b[<span class="num">1</span>]);
+
+        <span class="ty">int</span> keep = <span class="num">0</span>, lastEnd = Integer.MIN_VALUE;
+        <span class="kw">for</span> (<span class="ty">int</span>[] a : iv) {
+            <span class="kw">if</span> (a[<span class="num">0</span>] >= lastEnd) {
+                keep++;
+                lastEnd = a[<span class="num">1</span>];
+            }
+        }
+        System.out.println(<span class="str">"Min removals: "</span> + (n - keep));
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n log n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+</div>
+</div>
+
+<!-- MIN COST ASSIGN -->
+<div class="sec" id="assign">
+<div class="card">
+<div class="ch"><span class="badge b-easy">Easy</span><span class="ctitle">1. Minimize sum of products — pair smallest with largest</span></div>
+<div class="algo"><strong>Algorithm:</strong> Sort array A ascending, sort array B descending. Pair A[i] with B[i]. Sum of products is minimized. Proof: rearrangement inequality.</div>
+<pre><span class="kw">import</span> java.util.*;
+
+<span class="kw">public class</span> <span class="cls">MinSumProducts</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> <span class="cls">Scanner</span>(System.in);
+        <span class="ty">int</span> n = sc.nextInt();
+        <span class="ty">int</span>[] a = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="ty">int</span>[] b = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; n; i++) a[i] = sc.nextInt();
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; n; i++) b[i] = sc.nextInt();
+
+        Arrays.sort(a);                    <span class="cm">// ascending</span>
+        Arrays.sort(b);                    <span class="cm">// ascending then reverse</span>
+        <span class="ty">long</span> minSum = <span class="num">0</span>;
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; n; i++)
+            minSum += (long) a[i] * b[n - <span class="num">1</span> - i]; <span class="cm">// pair with largest</span>
+
+        System.out.println(<span class="str">"Min sum of products: "</span> + minSum);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n log n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+<div class="tip">To maximize sum of products: sort both ascending, pair a[i] with b[i].</div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge b-med">Med</span><span class="ctitle">2. Assign tasks to workers — minimize max completion time</span></div>
+<div class="algo"><strong>Algorithm:</strong> Sort tasks descending. Assign each task to the worker with current minimum load (use a min-heap of loads). This balances workload optimally.</div>
+<pre><span class="kw">import</span> java.util.*;
+
+<span class="kw">public class</span> <span class="cls">AssignTasks</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> <span class="cls">Scanner</span>(System.in);
+        <span class="ty">int</span> n = sc.nextInt(), w = sc.nextInt();
+        <span class="ty">int</span>[] tasks = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; n; i++) tasks[i] = sc.nextInt();
+        Arrays.sort(tasks); <span class="cm">// sort ascending</span>
+
+        <span class="cm">// min-heap: stores current load of each worker</span>
+        PriorityQueue&lt;Long&gt; heap = <span class="kw">new</span> PriorityQueue&lt;&gt;();
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; w; i++) heap.offer(<span class="num">0L</span>);
+
+        <span class="kw">for</span> (<span class="ty">int</span> i = n - <span class="num">1</span>; i &gt;= <span class="num">0</span>; i--) { <span class="cm">// largest task first</span>
+            <span class="ty">long</span> minLoad = heap.poll();
+            heap.offer(minLoad + tasks[i]);
+        }
+        <span class="ty">long</span> maxLoad = <span class="num">0</span>;
+        <span class="kw">for</span> (<span class="ty">long</span> l : heap) maxLoad = Math.max(maxLoad, l);
+        System.out.println(<span class="str">"Min max time: "</span> + maxLoad);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n log w)</span></div><div class="chip">Space <span>O(w)</span></div></div>
+</div>
+</div>
+
+<!-- MAXIMIZE SUM -->
+<div class="sec" id="maxsum">
+<div class="card">
+<div class="ch"><span class="badge b-easy">Easy</span><span class="ctitle">1. Maximum sum by flipping at most K negatives</span></div>
+<div class="algo"><strong>Algorithm:</strong> Sort by absolute value descending. Flip negatives from largest absolute value first. If K flips remain and all are positive, flip the smallest element (if K is odd).</div>
+<pre><span class="kw">import</span> java.util.*;
+
+<span class="kw">public class</span> <span class="cls">MaxSumFlipK</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> <span class="cls">Scanner</span>(System.in);
+        <span class="ty">int</span> n = sc.nextInt(), k = sc.nextInt();
+        <span class="ty">int</span>[] a = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; n; i++) a[i] = sc.nextInt();
+
+        <span class="cm">// sort by absolute value descending</span>
+        Integer[] boxed = Arrays.stream(a).boxed().toArray(Integer[]::new);
+        Arrays.sort(boxed, (x, y) -> Math.abs(y) - Math.abs(x));
+
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; n && k &gt; <span class="num">0</span>; i++) {
+            <span class="kw">if</span> (boxed[i] &lt; <span class="num">0</span>) { boxed[i] = -boxed[i]; k--; }
+        }
+        <span class="cm">// if k is still odd, flip the smallest absolute value</span>
+        <span class="kw">if</span> (k % <span class="num">2</span> != <span class="num">0</span>) boxed[n - <span class="num">1</span>] = -Math.abs(boxed[n - <span class="num">1</span>]);
+
+        <span class="ty">long</span> sum = <span class="num">0</span>;
+        <span class="kw">for</span> (<span class="ty">int</span> x : boxed) sum += x;
+        System.out.println(<span class="str">"Max sum: "</span> + sum);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n log n)</span></div><div class="chip">Space <span>O(n)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge b-med">Med</span><span class="ctitle">2. Maximum profit — stock buy/sell unlimited times</span></div>
+<div class="algo"><strong>Algorithm:</strong> Greedily add every positive difference a[i] − a[i−1]. Equivalent to buying at every valley and selling at every peak.</div>
+<pre><span class="kw">import</span> java.util.*;
+
+<span class="kw">public class</span> <span class="cls">StockMaxProfit</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> <span class="cls">Scanner</span>(System.in);
+        <span class="ty">int</span> n = sc.nextInt();
+        <span class="ty">int</span>[] price = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; n; i++) price[i] = sc.nextInt();
+
+        <span class="ty">long</span> profit = <span class="num">0</span>;
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">1</span>; i &lt; n; i++) {
+            <span class="kw">if</span> (price[i] &gt; price[i - <span class="num">1</span>])
+                profit += price[i] - price[i - <span class="num">1</span>];
+        }
+        System.out.println(<span class="str">"Max profit: "</span> + profit);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+</div>
+</div>
+
+<!-- TWO ARRAY PAIRING -->
+<div class="sec" id="pair">
+<div class="card">
+<div class="ch"><span class="badge b-easy">Easy</span><span class="ctitle">1. Maximum number of pairs where A[i] > B[j]</span></div>
+<div class="algo"><strong>Algorithm:</strong> Sort A ascending, sort B ascending. Use two pointers: try to match smallest available A with smallest B. If A[i] > B[j], it's a valid pair — count it and advance both. Else advance A.</div>
+<pre><span class="kw">import</span> java.util.*;
+
+<span class="kw">public class</span> <span class="cls">MaxPairsWin</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> <span class="cls">Scanner</span>(System.in);
+        <span class="ty">int</span> n = sc.nextInt();
+        <span class="ty">int</span>[] a = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="ty">int</span>[] b = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; n; i++) a[i] = sc.nextInt();
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; n; i++) b[i] = sc.nextInt();
+
+        Arrays.sort(a);
+        Arrays.sort(b);
+
+        <span class="ty">int</span> i = <span class="num">0</span>, j = <span class="num">0</span>, pairs = <span class="num">0</span>;
+        <span class="kw">while</span> (i &lt; n && j &lt; n) {
+            <span class="kw">if</span> (a[i] &gt; b[j]) { pairs++; i++; j++; }
+            <span class="kw">else</span> i++;
+        }
+        System.out.println(<span class="str">"Max pairs: "</span> + pairs);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n log n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+<div class="tip">Classic Div 3: "how many tasks can you complete given strengths and difficulties?"</div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge b-med">Med</span><span class="ctitle">2. Minimum cost to pair all elements</span></div>
+<div class="algo"><strong>Algorithm:</strong> Sort array. Pair element at index i with element at index n−1−i. The cost of each pair is |a[i]−a[n−1−i]|. Summing these gives the minimum total cost.</div>
+<pre><span class="kw">import</span> java.util.*;
+
+<span class="kw">public class</span> <span class="cls">MinPairCost</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> <span class="cls">Scanner</span>(System.in);
+        <span class="ty">int</span> n = sc.nextInt(); <span class="cm">// n must be even</span>
+        <span class="ty">int</span>[] a = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; n; i++) a[i] = sc.nextInt();
+        Arrays.sort(a);
+
+        <span class="ty">long</span> cost = <span class="num">0</span>;
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; n / <span class="num">2</span>; i++)
+            cost += a[n - <span class="num">1</span> - i] - a[i]; <span class="cm">// always non-negative</span>
+
+        System.out.println(<span class="str">"Min pair cost: "</span> + cost);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n log n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+</div>
+</div>
+
+<!-- STRING GREEDY -->
+<div class="sec" id="string">
+<div class="card">
+<div class="ch"><span class="badge b-easy">Easy</span><span class="ctitle">1. Lexicographically smallest string by swapping adjacent</span></div>
+<div class="algo"><strong>Algorithm:</strong> Repeatedly scan left to right. Find smallest character in remaining suffix, move it to current position by swapping adjacent characters. Repeat for each position.</div>
+<pre><span class="kw">import</span> java.util.*;
+
+<span class="kw">public class</span> <span class="cls">LexSmallest</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> <span class="cls">Scanner</span>(System.in);
+        <span class="ty">char</span>[] s = sc.next().toCharArray();
+        <span class="ty">int</span> n = s.length;
+
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; n - <span class="num">1</span>; i++) {
+            <span class="ty">int</span> minIdx = i;
+            <span class="kw">for</span> (<span class="ty">int</span> j = i + <span class="num">1</span>; j &lt; n; j++)
+                <span class="kw">if</span> (s[j] &lt; s[minIdx]) minIdx = j;
+
+            <span class="cm">// bubble minIdx to position i</span>
+            <span class="kw">while</span> (minIdx &gt; i) {
+                <span class="ty">char</span> tmp = s[minIdx];
+                s[minIdx] = s[minIdx - <span class="num">1</span>];
+                s[minIdx - <span class="num">1</span>] = tmp;
+                minIdx--;
+            }
+        }
+        System.out.println(<span class="kw">new</span> String(s));
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n²)</span></div><div class="chip">Space <span>O(n)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge b-med">Med</span><span class="ctitle">2. Remove minimum characters to make string balanced (brackets)</span></div>
+<div class="algo"><strong>Algorithm:</strong> Scan left to right. Track open count. If ')' seen and open == 0, it must be removed (count++). Else decrement open. Remaining open count = unmatched '(' to remove.</div>
+<pre><span class="kw">import</span> java.util.*;
+
+<span class="kw">public class</span> <span class="cls">MinRemoveBrackets</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> <span class="cls">Scanner</span>(System.in);
+        String s = sc.next();
+        <span class="ty">int</span> open = <span class="num">0</span>, remove = <span class="num">0</span>;
+
+        <span class="kw">for</span> (<span class="ty">char</span> c : s.toCharArray()) {
+            <span class="kw">if</span> (c == <span class="str">'('</span>) {
+                open++;
+            } <span class="kw">else</span> { <span class="cm">// c == ')'</span>
+                <span class="kw">if</span> (open == <span class="num">0</span>) remove++; <span class="cm">// unmatched ')'</span>
+                <span class="kw">else</span> open--;
+            }
+        }
+        remove += open; <span class="cm">// unmatched '('</span>
+        System.out.println(<span class="str">"Min removals: "</span> + remove);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge b-med">Med</span><span class="ctitle">3. Check if string can be rearranged into K palindromes</span></div>
+<div class="algo"><strong>Algorithm:</strong> Count frequency of each character. Count how many characters have odd frequency. A palindrome can have at most 1 odd-frequency char. So we need oddCount ≤ K and K ≤ n.</div>
+<pre><span class="kw">import</span> java.util.*;
+
+<span class="kw">public class</span> <span class="cls">KPalindromes</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> <span class="cls">Scanner</span>(System.in);
+        String s = sc.next();
+        <span class="ty">int</span> k = sc.nextInt();
+        <span class="ty">int</span>[] freq = <span class="kw">new</span> <span class="ty">int</span>[<span class="num">26</span>];
+        <span class="kw">for</span> (<span class="ty">char</span> c : s.toCharArray()) freq[c - <span class="str">'a'</span>]++;
+
+        <span class="ty">int</span> oddCount = <span class="num">0</span>;
+        <span class="kw">for</span> (<span class="ty">int</span> f : freq) <span class="kw">if</span> (f % <span class="num">2</span> != <span class="num">0</span>) oddCount++;
+
+        <span class="kw">boolean</span> possible = (k &lt;= s.length() && oddCount &lt;= k);
+        System.out.println(possible ? <span class="str">"YES"</span> : <span class="str">"NO"</span>);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+</div>
+</div>
+
+<!-- GAS / JUMP -->
+<div class="sec" id="gas">
+<div class="card">
+<div class="ch"><span class="badge b-med">Med</span><span class="ctitle">1. Gas station — can you complete the circuit?</span></div>
+<div class="algo"><strong>Algorithm:</strong> If total gas ≥ total cost, solution exists. Track running tank. When tank goes negative, the start must be the next station. Reset tank and start.</div>
+<pre><span class="kw">import</span> java.util.*;
+
+<span class="kw">public class</span> <span class="cls">GasStation</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> <span class="cls">Scanner</span>(System.in);
+        <span class="ty">int</span> n = sc.nextInt();
+        <span class="ty">int</span>[] gas  = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="ty">int</span>[] cost = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; n; i++) gas[i]  = sc.nextInt();
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; n; i++) cost[i] = sc.nextInt();
+
+        <span class="ty">int</span> total = <span class="num">0</span>, tank = <span class="num">0</span>, start = <span class="num">0</span>;
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; n; i++) {
+            <span class="ty">int</span> diff = gas[i] - cost[i];
+            total += diff;
+            tank  += diff;
+            <span class="kw">if</span> (tank &lt; <span class="num">0</span>) { start = i + <span class="num">1</span>; tank = <span class="num">0</span>; }
+        }
+        <span class="kw">if</span> (total &lt; <span class="num">0</span>) System.out.println(<span class="str">"Impossible"</span>);
+        <span class="kw">else</span>           System.out.println(<span class="str">"Start at: "</span> + start);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge b-med">Med</span><span class="ctitle">2. Jump game — can you reach the last index?</span></div>
+<div class="algo"><strong>Algorithm:</strong> Track maximum reachable index. At each position, update maxReach = max(maxReach, i + a[i]). If i ever exceeds maxReach, return false.</div>
+<pre><span class="kw">import</span> java.util.*;
+
+<span class="kw">public class</span> <span class="cls">JumpGame</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> <span class="cls">Scanner</span>(System.in);
+        <span class="ty">int</span> n = sc.nextInt();
+        <span class="ty">int</span>[] a = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; n; i++) a[i] = sc.nextInt();
+
+        <span class="ty">int</span> maxReach = <span class="num">0</span>;
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; n; i++) {
+            <span class="kw">if</span> (i &gt; maxReach) {
+                System.out.println(<span class="str">"Cannot reach end"</span>);
+                <span class="kw">return</span>;
+            }
+            maxReach = Math.max(maxReach, i + a[i]);
+        }
+        System.out.println(<span class="str">"Can reach end"</span>);
+    }
+}
+
+<span class="cm">// Minimum jumps to reach end (greedy)</span>
+<span class="kw">public class</span> <span class="cls">MinJumps</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> <span class="cls">Scanner</span>(System.in);
+        <span class="ty">int</span> n = sc.nextInt();
+        <span class="ty">int</span>[] a = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; n; i++) a[i] = sc.nextInt();
+
+        <span class="ty">int</span> jumps = <span class="num">0</span>, curEnd = <span class="num">0</span>, farthest = <span class="num">0</span>;
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; n - <span class="num">1</span>; i++) {
+            farthest = Math.max(farthest, i + a[i]);
+            <span class="kw">if</span> (i == curEnd) { jumps++; curEnd = farthest; }
+        }
+        System.out.println(<span class="str">"Min jumps: "</span> + jumps);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+</div>
+</div>
+
+<!-- EXTRA PATTERNS -->
+<div class="sec" id="extra">
+<div class="card">
+<div class="ch"><span class="badge b-easy">Easy</span><span class="ctitle">1. Fractional knapsack</span></div>
+<div class="algo"><strong>Algorithm:</strong> Calculate value/weight ratio for each item. Sort descending by ratio. Fill knapsack greedily — take full item if it fits, else take fraction.</div>
+<pre><span class="kw">import</span> java.util.*;
+
+<span class="kw">public class</span> <span class="cls">FractionalKnapsack</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> <span class="cls">Scanner</span>(System.in);
+        <span class="ty">int</span> n = sc.nextInt();
+        <span class="ty">double</span> W = sc.nextDouble();
+        <span class="ty">double</span>[][] items = <span class="kw">new</span> <span class="ty">double</span>[n][<span class="num">2</span>]; <span class="cm">// [value, weight]</span>
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; n; i++) {
+            items[i][<span class="num">0</span>] = sc.nextDouble(); <span class="cm">// value</span>
+            items[i][<span class="num">1</span>] = sc.nextDouble(); <span class="cm">// weight</span>
+        }
+        <span class="cm">// sort by ratio descending</span>
+        Arrays.sort(items, (a, b) ->
+            Double.compare(b[<span class="num">0</span>]/b[<span class="num">1</span>], a[<span class="num">0</span>]/a[<span class="num">1</span>]));
+
+        <span class="ty">double</span> totalValue = <span class="num">0</span>, remaining = W;
+        <span class="kw">for</span> (<span class="ty">double</span>[] item : items) {
+            <span class="kw">if</span> (remaining &lt;= <span class="num">0</span>) <span class="kw">break</span>;
+            <span class="ty">double</span> take = Math.min(item[<span class="num">1</span>], remaining);
+            totalValue += take * (item[<span class="num">0</span>] / item[<span class="num">1</span>]);
+            remaining -= take;
+        }
+        System.out.printf(<span class="str">"Max value: %.2f%n"</span>, totalValue);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n log n)</span></div><div class="chip">Space <span>O(n)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge b-easy">Easy</span><span class="ctitle">2. Minimum platforms needed at railway station</span></div>
+<div class="algo"><strong>Algorithm:</strong> Sort arrivals and departures separately. Two-pointer: increment platform count on arrival, decrement on departure. Track maximum platform count.</div>
+<pre><span class="kw">import</span> java.util.*;
+
+<span class="kw">public class</span> <span class="cls">MinPlatforms</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> <span class="cls">Scanner</span>(System.in);
+        <span class="ty">int</span> n = sc.nextInt();
+        <span class="ty">int</span>[] arr = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="ty">int</span>[] dep = <span class="kw">new</span> <span class="ty">int</span>[n];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; n; i++) arr[i] = sc.nextInt();
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; n; i++) dep[i] = sc.nextInt();
+
+        Arrays.sort(arr);
+        Arrays.sort(dep);
+
+        <span class="ty">int</span> plat = <span class="num">1</span>, maxPlat = <span class="num">1</span>;
+        <span class="ty">int</span> i = <span class="num">1</span>, j = <span class="num">0</span>;
+        <span class="kw">while</span> (i &lt; n && j &lt; n) {
+            <span class="kw">if</span> (arr[i] &lt;= dep[j]) { plat++; i++; }
+            <span class="kw">else</span>                  { plat--; j++; }
+            maxPlat = Math.max(maxPlat, plat);
+        }
+        System.out.println(<span class="str">"Min platforms: "</span> + maxPlat);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n log n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge b-med">Med</span><span class="ctitle">3. Minimum number of arrows to burst all balloons</span></div>
+<div class="algo"><strong>Algorithm:</strong> Sort by end coordinate. Shoot arrow at end of first balloon. Skip all balloons it pierces. Shoot new arrow at end of next un-popped balloon.</div>
+<pre><span class="kw">import</span> java.util.*;
+
+<span class="kw">public class</span> <span class="cls">MinArrows</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> <span class="cls">Scanner</span>(System.in);
+        <span class="ty">int</span> n = sc.nextInt();
+        <span class="ty">int</span>[][] b = <span class="kw">new</span> <span class="ty">int</span>[n][<span class="num">2</span>];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; n; i++) {
+            b[i][<span class="num">0</span>] = sc.nextInt();
+            b[i][<span class="num">1</span>] = sc.nextInt();
+        }
+        Arrays.sort(b, (a, c) -> Integer.compare(a[<span class="num">1</span>], c[<span class="num">1</span>]));
+
+        <span class="ty">int</span> arrows = <span class="num">1</span>;
+        <span class="ty">int</span> arrowPos = b[<span class="num">0</span>][<span class="num">1</span>];
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">1</span>; i &lt; n; i++) {
+            <span class="kw">if</span> (b[i][<span class="num">0</span>] &gt; arrowPos) {
+                arrows++;
+                arrowPos = b[i][<span class="num">1</span>];
+            }
+        }
+        System.out.println(<span class="str">"Min arrows: "</span> + arrows);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n log n)</span></div><div class="chip">Space <span>O(1)</span></div></div>
+</div>
+
+<div class="card">
+<div class="ch"><span class="badge b-med">Med</span><span class="ctitle">4. Maximum tasks with deadline (job sequencing)</span></div>
+<div class="algo"><strong>Algorithm:</strong> Sort jobs by profit descending. For each job, find the latest free slot before its deadline (use a boolean array). Assign job to that slot. Count filled slots.</div>
+<pre><span class="kw">import</span> java.util.*;
+
+<span class="kw">public class</span> <span class="cls">JobSequencing</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> <span class="cls">Scanner</span>(System.in);
+        <span class="ty">int</span> n = sc.nextInt();
+        <span class="ty">int</span>[][] jobs = <span class="kw">new</span> <span class="ty">int</span>[n][<span class="num">2</span>]; <span class="cm">// [deadline, profit]</span>
+        <span class="ty">int</span> maxD = <span class="num">0</span>;
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; n; i++) {
+            jobs[i][<span class="num">0</span>] = sc.nextInt(); <span class="cm">// deadline</span>
+            jobs[i][<span class="num">1</span>] = sc.nextInt(); <span class="cm">// profit</span>
+            maxD = Math.max(maxD, jobs[i][<span class="num">0</span>]);
+        }
+        <span class="cm">// sort by profit descending</span>
+        Arrays.sort(jobs, (a, b) -> b[<span class="num">1</span>] - a[<span class="num">1</span>]);
+
+        <span class="ty">boolean</span>[] slot = <span class="kw">new</span> <span class="ty">boolean</span>[maxD + <span class="num">1</span>];
+        <span class="ty">int</span> totalProfit = <span class="num">0</span>, count = <span class="num">0</span>;
+        <span class="kw">for</span> (<span class="ty">int</span>[] job : jobs) {
+            <span class="cm">// find latest free slot before deadline</span>
+            <span class="kw">for</span> (<span class="ty">int</span> t = job[<span class="num">0</span>]; t &gt;= <span class="num">1</span>; t--) {
+                <span class="kw">if</span> (!slot[t]) {
+                    slot[t] = <span class="kw">true</span>;
+                    totalProfit += job[<span class="num">1</span>];
+                    count++;
+                    <span class="kw">break</span>;
+                }
+            }
+        }
+        System.out.println(<span class="str">"Jobs done: "</span> + count +
+            <span class="str">", Max profit: "</span> + totalProfit);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n² worst case)</span></div><div class="chip">Space <span>O(maxDeadline)</span></div></div>
+</div>
+</div>
+
+</div>
+
+<script>
+function sw(id){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
