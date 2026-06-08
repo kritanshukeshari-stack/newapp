@@ -1,0 +1,925 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0f1117}
+.root{background:#0f1117;color:#e2e8f0;font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;padding:10%}
+.page-title{font-size:20px;font-weight:500;color:#a78bfa;margin-bottom:4px}
+.page-sub{font-size:13px;color:#475569;margin-bottom:24px}
+.cat-label{font-size:11px;font-weight:500;letter-spacing:.8px;color:#64748b;text-transform:uppercase;margin:28px 0 10px}
+.card{background:#161b27;border:0.5px solid #1e2535;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
+.q-title{font-size:14px;font-weight:500;color:#e2e8f0}
+.badge{font-size:10px;font-weight:500;padding:2px 8px;border-radius:5px;white-space:nowrap;flex-shrink:0}
+.easy{background:#0c2d1a;color:#4ade80;border:0.5px solid #059669}
+.pattern{font-size:11px;color:#7c3aed;background:#1e1040;border:0.5px solid #4c1d95;border-radius:4px;padding:2px 7px;display:inline-block;margin-bottom:8px}
+.algo-box{background:#0a0d15;border-left:3px solid #7c3aed;border-radius:0 4px 4px 0;padding:8px 12px;font-size:12px;color:#94a3b8;line-height:1.65;margin-bottom:10px}
+.algo-box strong{color:#a78bfa;font-weight:500}
+pre{background:#070a10;border:0.5px solid #1a1e30;border-radius:8px;padding:12px 14px;font-family:'Fira Code','Cascadia Code',monospace;font-size:11.5px;line-height:1.75;color:#cdd6f4;overflow-x:auto;white-space:pre;margin-bottom:10px}
+.kw{color:#c084fc}.ty{color:#7dd3fc}.fn{color:#6ee7b7}.cm{color:#3d4f6b;font-style:italic}.str{color:#a6e3a1}.num{color:#fb923c}.cls{color:#fbbf24}
+.tree-wrap{background:#070a10;border:0.5px solid #1a1e30;border-radius:8px;padding:8px;margin-bottom:6px;overflow-x:auto}
+.tree-wrap svg{display:block}
+.cx{display:flex;gap:10px;flex-wrap:wrap}
+.chip{background:#0f1421;border:0.5px solid #1e2535;border-radius:5px;padding:2px 10px;font-size:11px;color:#64748b}
+.chip span{color:#f9a8d4;font-weight:500}
+.divider{height:0.5px;background:#1e2535;margin:24px 0}
+</style>
+
+<div class="root">
+<h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">LeetCode recursion problems — 30 questions with Java code, algorithm, and call tree diagrams</h2>
+<p class="page-title">Recursion — 30 LeetCode problems</p>
+<p class="page-sub">Easy level · Service-based + mid-tier product companies · Complete Java solutions + call tree diagrams</p>
+
+<div class="cat-label">Basics — factorial, fibonacci, power</div>
+
+<!-- Q1: Factorial -->
+<div class="card">
+<div class="card-head"><span class="q-title">1. Factorial (n!)</span><span class="badge easy">Easy</span></div>
+<span class="pattern">basic recursion</span>
+<div class="algo-box"><strong>Algorithm:</strong> Base case n==0 or n==1 → return 1. Recursive case: n * factorial(n-1). Each call reduces n by 1 until base case.</div>
+<pre><span class="kw">public class</span> <span class="cls">Factorial</span> {
+    <span class="kw">public static int</span> <span class="fn">factorial</span>(<span class="ty">int</span> n) {
+        <span class="kw">if</span> (n == <span class="num">0</span> || n == <span class="num">1</span>) <span class="kw">return</span> <span class="num">1</span>; <span class="cm">// base case</span>
+        <span class="kw">return</span> n * <span class="fn">factorial</span>(n - <span class="num">1</span>);           <span class="cm">// recursive case</span>
+    }
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        System.out.println(<span class="fn">factorial</span>(<span class="num">5</span>)); <span class="cm">// 120</span>
+    }
+}</pre>
+<div class="tree-wrap">
+<svg width="500" height="120" viewBox="0 0 500 120" role="img"><title>Factorial(4) call tree</title>
+  <defs><marker id="ta" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#334155" stroke-width="1.5"/></marker></defs>
+  <rect x="10" y="8" width="110" height="28" rx="6" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+  <text fill="#a78bfa" font-size="11" text-anchor="middle" dominant-baseline="central" x="65" y="22">factorial(4)</text>
+  <line x1="65" y1="36" x2="150" y2="52" stroke="#334155" stroke-width="0.5" marker-end="url(#ta)"/>
+  <rect x="100" y="52" width="110" height="28" rx="6" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+  <text fill="#a78bfa" font-size="11" text-anchor="middle" dominant-baseline="central" x="155" y="66">factorial(3)</text>
+  <line x1="155" y1="80" x2="240" y2="96" stroke="#334155" stroke-width="0.5" marker-end="url(#ta)"/>
+  <rect x="190" y="96" width="110" height="28" rx="6" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+  <text fill="#a78bfa" font-size="11" text-anchor="middle" dominant-baseline="central" x="245" y="110">factorial(2)</text>
+  <line x1="245" y1="96" x2="340" y2="80" stroke="#334155" stroke-width="0.5" marker-end="url(#ta)"/>
+  <rect x="290" y="52" width="110" height="28" rx="6" fill="#0c2d1a" stroke="#059669" stroke-width="0.5"/>
+  <text fill="#4ade80" font-size="11" text-anchor="middle" dominant-baseline="central" x="345" y="66">factorial(1)=1</text>
+  <text fill="#64748b" font-size="10" x="10" y="115">returns: 1→2→6→24</text>
+</svg>
+</div>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(n) stack</span></div></div>
+</div>
+
+<!-- Q2: Fibonacci -->
+<div class="card">
+<div class="card-head"><span class="q-title">2. Fibonacci number (LeetCode 509)</span><span class="badge easy">Easy</span></div>
+<span class="pattern">tree recursion</span>
+<div class="algo-box"><strong>Algorithm:</strong> Base cases: fib(0)=0, fib(1)=1. Recursive: fib(n-1)+fib(n-2). Two branches at every node — exponential without memoization. With memo: O(n).</div>
+<pre><span class="kw">public class</span> <span class="cls">Fibonacci</span> {
+    <span class="kw">private int</span>[] memo;
+
+    <span class="kw">public int</span> <span class="fn">fib</span>(<span class="ty">int</span> n) {
+        memo = <span class="kw">new</span> <span class="ty">int</span>[n + <span class="num">2</span>];
+        Arrays.fill(memo, -<span class="num">1</span>);
+        <span class="kw">return</span> <span class="fn">solve</span>(n);
+    }
+
+    <span class="kw">private int</span> <span class="fn">solve</span>(<span class="ty">int</span> n) {
+        <span class="kw">if</span> (n == <span class="num">0</span>) <span class="kw">return</span> <span class="num">0</span>;
+        <span class="kw">if</span> (n == <span class="num">1</span>) <span class="kw">return</span> <span class="num">1</span>;
+        <span class="kw">if</span> (memo[n] != -<span class="num">1</span>) <span class="kw">return</span> memo[n];
+        memo[n] = <span class="fn">solve</span>(n - <span class="num">1</span>) + <span class="fn">solve</span>(n - <span class="num">2</span>);
+        <span class="kw">return</span> memo[n];
+    }
+}</pre>
+<div class="tree-wrap">
+<svg width="500" height="140" viewBox="0 0 500 140" role="img"><title>Fibonacci(4) call tree</title>
+  <defs><marker id="tb" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#334155" stroke-width="1.5"/></marker></defs>
+  <rect x="190" y="8" width="80" height="26" rx="5" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+  <text fill="#a78bfa" font-size="11" text-anchor="middle" dominant-baseline="central" x="230" y="21">fib(4)</text>
+  <line x1="210" y1="34" x2="120" y2="56" stroke="#334155" stroke-width="0.5" marker-end="url(#tb)"/>
+  <line x1="250" y1="34" x2="330" y2="56" stroke="#334155" stroke-width="0.5" marker-end="url(#tb)"/>
+  <rect x="70" y="56" width="80" height="26" rx="5" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+  <text fill="#a78bfa" font-size="11" text-anchor="middle" dominant-baseline="central" x="110" y="69">fib(3)</text>
+  <rect x="290" y="56" width="80" height="26" rx="5" fill="#0c2040" stroke="#0369a1" stroke-width="0.5"/>
+  <text fill="#60a5fa" font-size="11" text-anchor="middle" dominant-baseline="central" x="330" y="69">fib(2)</text>
+  <line x1="90" y1="82" x2="50" y2="106" stroke="#334155" stroke-width="0.5" marker-end="url(#tb)"/>
+  <line x1="130" y1="82" x2="180" y2="106" stroke="#334155" stroke-width="0.5" marker-end="url(#tb)"/>
+  <rect x="10" y="106" width="80" height="26" rx="5" fill="#0c2040" stroke="#0369a1" stroke-width="0.5"/>
+  <text fill="#60a5fa" font-size="11" text-anchor="middle" dominant-baseline="central" x="50" y="119">fib(2)</text>
+  <rect x="150" y="106" width="80" height="26" rx="5" fill="#0c2d1a" stroke="#059669" stroke-width="0.5"/>
+  <text fill="#4ade80" font-size="11" text-anchor="middle" dominant-baseline="central" x="190" y="119">fib(1)=1</text>
+  <text fill="#64748b" font-size="10" x="290" y="125">memo avoids recompute</text>
+</svg>
+</div>
+<div class="cx"><div class="chip">Time <span>O(n) with memo</span></div><div class="chip">Space <span>O(n)</span></div></div>
+</div>
+
+<!-- Q3: Power -->
+<div class="card">
+<div class="card-head"><span class="q-title">3. Pow(x, n) — LeetCode 50</span><span class="badge easy">Easy</span></div>
+<span class="pattern">divide & conquer</span>
+<div class="algo-box"><strong>Algorithm:</strong> Fast power. If n is even: pow(x,n) = half*half where half=pow(x,n/2). If odd: x*half*half. Halves the problem each call → O(log n).</div>
+<pre><span class="kw">public class</span> <span class="cls">MyPow</span> {
+    <span class="kw">public double</span> <span class="fn">myPow</span>(<span class="ty">double</span> x, <span class="ty">int</span> n) {
+        <span class="ty">long</span> N = n; <span class="cm">// handle Integer.MIN_VALUE</span>
+        <span class="kw">if</span> (N &lt; <span class="num">0</span>) { x = <span class="num">1</span> / x; N = -N; }
+        <span class="kw">return</span> <span class="fn">fastPow</span>(x, N);
+    }
+
+    <span class="kw">private double</span> <span class="fn">fastPow</span>(<span class="ty">double</span> x, <span class="ty">long</span> n) {
+        <span class="kw">if</span> (n == <span class="num">0</span>) <span class="kw">return</span> <span class="num">1.0</span>; <span class="cm">// base case</span>
+        <span class="ty">double</span> half = <span class="fn">fastPow</span>(x, n / <span class="num">2</span>);
+        <span class="kw">if</span> (n % <span class="num">2</span> == <span class="num">0</span>) <span class="kw">return</span> half * half;
+        <span class="kw">else</span>             <span class="kw">return</span> x * half * half;
+    }
+}</pre>
+<div class="tree-wrap">
+<svg width="460" height="120" viewBox="0 0 460 120" role="img"><title>Pow(2,8) divide and conquer tree</title>
+  <defs><marker id="tc" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#334155" stroke-width="1.5"/></marker></defs>
+  <rect x="170" y="8" width="110" height="26" rx="5" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+  <text fill="#a78bfa" font-size="11" text-anchor="middle" dominant-baseline="central" x="225" y="21">pow(2, 8)</text>
+  <line x1="225" y1="34" x2="225" y2="54" stroke="#334155" stroke-width="0.5" marker-end="url(#tc)"/>
+  <rect x="170" y="54" width="110" height="26" rx="5" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+  <text fill="#a78bfa" font-size="11" text-anchor="middle" dominant-baseline="central" x="225" y="67">pow(2, 4)</text>
+  <line x1="225" y1="80" x2="225" y2="100" stroke="#334155" stroke-width="0.5" marker-end="url(#tc)"/>
+  <rect x="170" y="100" width="110" height="26" rx="5" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+  <text fill="#a78bfa" font-size="11" text-anchor="middle" dominant-baseline="central" x="225" y="113">pow(2, 2)</text>
+  <text fill="#64748b" font-size="10" x="300" y="30">n halves each call</text>
+  <text fill="#64748b" font-size="10" x="300" y="45">8→4→2→1→0</text>
+  <text fill="#4ade80" font-size="10" x="300" y="60">log₂(8) = 3 levels</text>
+  <text fill="#4ade80" font-size="10" x="300" y="75">returns: 4→16→256</text>
+</svg>
+</div>
+<div class="cx"><div class="chip">Time <span>O(log n)</span></div><div class="chip">Space <span>O(log n)</span></div></div>
+</div>
+
+<div class="divider"></div>
+<div class="cat-label">String / Array recursion</div>
+
+<!-- Q4: Reverse String -->
+<div class="card">
+<div class="card-head"><span class="q-title">4. Reverse string — LeetCode 344</span><span class="badge easy">Easy</span></div>
+<span class="pattern">two-pointer recursion</span>
+<div class="algo-box"><strong>Algorithm:</strong> Swap s[left] and s[right]. Recurse with left+1, right-1. Base: left >= right → stop.</div>
+<pre><span class="kw">public class</span> <span class="cls">ReverseString</span> {
+    <span class="kw">public void</span> <span class="fn">reverseString</span>(<span class="ty">char</span>[] s) {
+        <span class="fn">reverse</span>(s, <span class="num">0</span>, s.length - <span class="num">1</span>);
+    }
+
+    <span class="kw">private void</span> <span class="fn">reverse</span>(<span class="ty">char</span>[] s, <span class="ty">int</span> l, <span class="ty">int</span> r) {
+        <span class="kw">if</span> (l &gt;= r) <span class="kw">return</span>; <span class="cm">// base case</span>
+        <span class="ty">char</span> tmp = s[l]; s[l] = s[r]; s[r] = tmp;
+        <span class="fn">reverse</span>(s, l + <span class="num">1</span>, r - <span class="num">1</span>);
+    }
+}</pre>
+<div class="tree-wrap">
+<svg width="460" height="110" viewBox="0 0 460 110" role="img"><title>Reverse string call trace for hello</title>
+  <text fill="#94a3b8" font-size="12" x="10" y="20">s = ['h','e','l','l','o']</text>
+  <rect x="10" y="30" width="175" height="24" rx="5" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+  <text fill="#a78bfa" font-size="11" dominant-baseline="central" x="16" y="42">reverse(0,4): swap h↔o</text>
+  <rect x="10" y="60" width="175" height="24" rx="5" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+  <text fill="#a78bfa" font-size="11" dominant-baseline="central" x="16" y="72">reverse(1,3): swap e↔l</text>
+  <rect x="10" y="90" width="175" height="24" rx="5" fill="#0c2d1a" stroke="#059669" stroke-width="0.5"/>
+  <text fill="#4ade80" font-size="11" dominant-baseline="central" x="16" y="102">reverse(2,2): l>=r, stop</text>
+  <text fill="#94a3b8" font-size="12" x="210" y="50">Result: ['o','l','l','e','h']</text>
+  <text fill="#64748b" font-size="11" x="210" y="70">Each call swaps one pair</text>
+  <text fill="#64748b" font-size="11" x="210" y="88">n/2 swaps total</text>
+</svg>
+</div>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(n/2) stack</span></div></div>
+</div>
+
+<!-- Q5: Palindrome Check -->
+<div class="card">
+<div class="card-head"><span class="q-title">5. Valid palindrome check (recursive)</span><span class="badge easy">Easy</span></div>
+<span class="pattern">two-pointer recursion</span>
+<div class="algo-box"><strong>Algorithm:</strong> Check s[left]==s[right]. If mismatch → false. Else recurse inward. Base: left>=right → true (all characters matched).</div>
+<pre><span class="kw">public class</span> <span class="cls">PalindromeCheck</span> {
+    <span class="kw">public boolean</span> <span class="fn">isPalindrome</span>(String s) {
+        String clean = s.toLowerCase()
+            .replaceAll(<span class="str">"[^a-z0-9]"</span>, <span class="str">""</span>);
+        <span class="kw">return</span> <span class="fn">check</span>(clean, <span class="num">0</span>, clean.length() - <span class="num">1</span>);
+    }
+
+    <span class="kw">private boolean</span> <span class="fn">check</span>(String s, <span class="ty">int</span> l, <span class="ty">int</span> r) {
+        <span class="kw">if</span> (l &gt;= r) <span class="kw">return true</span>;
+        <span class="kw">if</span> (s.charAt(l) != s.charAt(r)) <span class="kw">return false</span>;
+        <span class="kw">return</span> <span class="fn">check</span>(s, l + <span class="num">1</span>, r - <span class="num">1</span>);
+    }
+}</pre>
+<div class="tree-wrap">
+<svg width="460" height="100" viewBox="0 0 460 100" role="img"><title>Palindrome check call trace for racecar</title>
+  <text fill="#94a3b8" font-size="12" x="10" y="16">s = "racecar"</text>
+  <rect x="10" y="24" width="180" height="22" rx="5" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+  <text fill="#a78bfa" font-size="11" dominant-baseline="central" x="16" y="35">check(0,6): r==r ✓ → go in</text>
+  <rect x="10" y="52" width="180" height="22" rx="5" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+  <text fill="#a78bfa" font-size="11" dominant-baseline="central" x="16" y="63">check(1,5): a==a ✓ → go in</text>
+  <rect x="10" y="80" width="180" height="22" rx="5" fill="#0c2d1a" stroke="#059669" stroke-width="0.5"/>
+  <text fill="#4ade80" font-size="11" dominant-baseline="central" x="16" y="91">check(3,3): l>=r → true</text>
+  <text fill="#4ade80" font-size="12" x="210" y="50">returns: true</text>
+  <text fill="#64748b" font-size="11" x="210" y="70">"racecar" is palindrome</text>
+</svg>
+</div>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(n)</span></div></div>
+</div>
+
+<!-- Q6: Sum of digits -->
+<div class="card">
+<div class="card-head"><span class="q-title">6. Sum of digits of a number</span><span class="badge easy">Easy</span></div>
+<span class="pattern">basic recursion</span>
+<div class="algo-box"><strong>Algorithm:</strong> Extract last digit n%10, add it, recurse on n/10. Base: n==0 → return 0.</div>
+<pre><span class="kw">public class</span> <span class="cls">SumDigits</span> {
+    <span class="kw">public int</span> <span class="fn">sumOfDigits</span>(<span class="ty">int</span> n) {
+        <span class="kw">if</span> (n == <span class="num">0</span>) <span class="kw">return</span> <span class="num">0</span>; <span class="cm">// base case</span>
+        <span class="kw">return</span> (n % <span class="num">10</span>) + <span class="fn">sumOfDigits</span>(n / <span class="num">10</span>);
+    }
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        System.out.println(<span class="kw">new</span> <span class="cls">SumDigits</span>().<span class="fn">sumOfDigits</span>(<span class="num">1234</span>)); <span class="cm">// 10</span>
+    }
+}</pre>
+<div class="tree-wrap">
+<svg width="440" height="90" viewBox="0 0 440 90" role="img"><title>Sum of digits 1234 call chain</title>
+  <text fill="#94a3b8" font-size="12" x="10" y="16">n = 1234</text>
+  <rect x="10" y="24" width="135" height="22" rx="5" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+  <text fill="#a78bfa" font-size="11" dominant-baseline="central" x="15" y="35">4 + sum(123)</text>
+  <rect x="155" y="24" width="135" height="22" rx="5" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+  <text fill="#a78bfa" font-size="11" dominant-baseline="central" x="160" y="35">3 + sum(12)</text>
+  <rect x="300" y="24" width="130" height="22" rx="5" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+  <text fill="#a78bfa" font-size="11" dominant-baseline="central" x="305" y="35">2 + sum(1)</text>
+  <text fill="#4ade80" font-size="11" x="10" y="72">1+2+3+4 = 10</text>
+  <text fill="#64748b" font-size="11" x="150" y="72">Unwinds: 0+1+2+3+4 = 10</text>
+</svg>
+</div>
+<div class="cx"><div class="chip">Time <span>O(digits)</span></div><div class="chip">Space <span>O(digits)</span></div></div>
+</div>
+
+<div class="divider"></div>
+<div class="cat-label">Binary search / array recursion</div>
+
+<!-- Q7: Binary Search -->
+<div class="card">
+<div class="card-head"><span class="q-title">7. Binary search — LeetCode 704</span><span class="badge easy">Easy</span></div>
+<span class="pattern">divide & conquer</span>
+<div class="algo-box"><strong>Algorithm:</strong> Find mid. If a[mid]==target return mid. If target < a[mid] search left half. Else search right half. Base: lo > hi → -1.</div>
+<pre><span class="kw">public class</span> <span class="cls">BinarySearch</span> {
+    <span class="kw">public int</span> <span class="fn">search</span>(<span class="ty">int</span>[] nums, <span class="ty">int</span> target) {
+        <span class="kw">return</span> <span class="fn">bs</span>(nums, <span class="num">0</span>, nums.length - <span class="num">1</span>, target);
+    }
+
+    <span class="kw">private int</span> <span class="fn">bs</span>(<span class="ty">int</span>[] a, <span class="ty">int</span> lo, <span class="ty">int</span> hi, <span class="ty">int</span> t) {
+        <span class="kw">if</span> (lo &gt; hi) <span class="kw">return</span> -<span class="num">1</span>;
+        <span class="ty">int</span> mid = lo + (hi - lo) / <span class="num">2</span>;
+        <span class="kw">if</span>      (a[mid] == t) <span class="kw">return</span> mid;
+        <span class="kw">else if</span> (a[mid] &gt; t)  <span class="kw">return</span> <span class="fn">bs</span>(a, lo, mid-<span class="num">1</span>, t);
+        <span class="kw">else</span>                   <span class="kw">return</span> <span class="fn">bs</span>(a, mid+<span class="num">1</span>, hi, t);
+    }
+}</pre>
+<div class="tree-wrap">
+<svg width="460" height="120" viewBox="0 0 460 120" role="img"><title>Binary search call tree for target 7 in sorted array</title>
+  <text fill="#94a3b8" font-size="12" x="10" y="16">a=[1,3,5,7,9,11] target=7</text>
+  <rect x="130" y="24" width="190" height="24" rx="5" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+  <text fill="#a78bfa" font-size="11" text-anchor="middle" dominant-baseline="central" x="225" y="36">bs(0,5): mid=2, a[2]=5 &lt; 7</text>
+  <line x1="225" y1="48" x2="305" y2="64" stroke="#334155" stroke-width="0.5" marker-end="url(#tc)"/>
+  <rect x="230" y="64" width="190" height="24" rx="5" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+  <text fill="#a78bfa" font-size="11" text-anchor="middle" dominant-baseline="central" x="325" y="76">bs(3,5): mid=4, a[4]=9 &gt; 7</text>
+  <line x1="325" y1="88" x2="250" y2="104" stroke="#334155" stroke-width="0.5" marker-end="url(#tc)"/>
+  <rect x="175" y="104" width="190" height="24" rx="5" fill="#0c2d1a" stroke="#059669" stroke-width="0.5"/>
+  <text fill="#4ade80" font-size="11" text-anchor="middle" dominant-baseline="central" x="270" y="116">bs(3,3): a[3]=7 == 7 → return 3</text>
+</svg>
+</div>
+<div class="cx"><div class="chip">Time <span>O(log n)</span></div><div class="chip">Space <span>O(log n)</span></div></div>
+</div>
+
+<!-- Q8: First bad version -->
+<div class="card">
+<div class="card-head"><span class="q-title">8. First bad version — LeetCode 278</span><span class="badge easy">Easy</span></div>
+<span class="pattern">binary search recursion</span>
+<div class="algo-box"><strong>Algorithm:</strong> Same as binary search. If isBadVersion(mid) → bad is at mid or left. Else → bad is to the right. Narrow recursively.</div>
+<pre><span class="kw">public class</span> <span class="cls">FirstBadVersion</span> {
+    <span class="kw">public int</span> <span class="fn">firstBadVersion</span>(<span class="ty">int</span> n) {
+        <span class="kw">return</span> <span class="fn">find</span>(<span class="num">1</span>, n);
+    }
+
+    <span class="kw">private int</span> <span class="fn">find</span>(<span class="ty">int</span> lo, <span class="ty">int</span> hi) {
+        <span class="kw">if</span> (lo == hi) <span class="kw">return</span> lo; <span class="cm">// base: narrowed to one</span>
+        <span class="ty">int</span> mid = lo + (hi - lo) / <span class="num">2</span>;
+        <span class="kw">if</span> (<span class="fn">isBadVersion</span>(mid)) <span class="kw">return</span> <span class="fn">find</span>(lo, mid);
+        <span class="kw">else</span>                    <span class="kw">return</span> <span class="fn">find</span>(mid + <span class="num">1</span>, hi);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(log n)</span></div><div class="chip">Space <span>O(log n)</span></div></div>
+</div>
+
+<div class="divider"></div>
+<div class="cat-label">Linked list recursion</div>
+
+<!-- Q9: Reverse Linked List -->
+<div class="card">
+<div class="card-head"><span class="q-title">9. Reverse linked list — LeetCode 206</span><span class="badge easy">Easy</span></div>
+<span class="pattern">linked list recursion</span>
+<div class="algo-box"><strong>Algorithm:</strong> Base: node is null or last → return it. Recurse to end. On unwind: make next.next point back to current, set current.next = null. Returns the new head (last node).</div>
+<pre><span class="kw">public class</span> <span class="cls">ReverseList</span> {
+    <span class="kw">public</span> ListNode <span class="fn">reverseList</span>(ListNode head) {
+        <span class="cm">// base: empty or single node</span>
+        <span class="kw">if</span> (head == <span class="kw">null</span> || head.next == <span class="kw">null</span>)
+            <span class="kw">return</span> head;
+        ListNode newHead = <span class="fn">reverseList</span>(head.next);
+        head.next.next = head; <span class="cm">// reverse the link</span>
+        head.next = <span class="kw">null</span>;      <span class="cm">// cut original link</span>
+        <span class="kw">return</span> newHead;        <span class="cm">// propagate new head up</span>
+    }
+}</pre>
+<div class="tree-wrap">
+<svg width="460" height="130" viewBox="0 0 460 130" role="img"><title>Reverse linked list call and unwind trace</title>
+  <text fill="#94a3b8" font-size="12" x="10" y="16">1 → 2 → 3 → null</text>
+  <text fill="#475569" font-size="11" x="10" y="32">Call phase (recurse to end):</text>
+  <rect x="10" y="40" width="100" height="22" rx="5" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+  <text fill="#a78bfa" font-size="11" text-anchor="middle" dominant-baseline="central" x="60" y="51">rev(1)</text>
+  <line x1="110" y1="51" x2="130" y2="51" stroke="#334155" stroke-width="0.5" marker-end="url(#ta)"/>
+  <rect x="130" y="40" width="100" height="22" rx="5" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+  <text fill="#a78bfa" font-size="11" text-anchor="middle" dominant-baseline="central" x="180" y="51">rev(2)</text>
+  <line x1="230" y1="51" x2="250" y2="51" stroke="#334155" stroke-width="0.5" marker-end="url(#ta)"/>
+  <rect x="250" y="40" width="120" height="22" rx="5" fill="#0c2d1a" stroke="#059669" stroke-width="0.5"/>
+  <text fill="#4ade80" font-size="11" text-anchor="middle" dominant-baseline="central" x="310" y="51">rev(3)=newHead</text>
+  <text fill="#475569" font-size="11" x="10" y="82">Unwind phase:</text>
+  <text fill="#94a3b8" font-size="11" x="10" y="98">rev(2): 3.next=2, 2.next=null → 3→2</text>
+  <text fill="#94a3b8" font-size="11" x="10" y="114">rev(1): 2.next=1, 1.next=null → 3→2→1</text>
+  <text fill="#4ade80" font-size="11" x="10" y="130">Result: 3 → 2 → 1 → null</text>
+</svg>
+</div>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(n) stack</span></div></div>
+</div>
+
+<!-- Q10: Merge Two Sorted Lists -->
+<div class="card">
+<div class="card-head"><span class="q-title">10. Merge two sorted lists — LeetCode 21</span><span class="badge easy">Easy</span></div>
+<span class="pattern">linked list recursion</span>
+<div class="algo-box"><strong>Algorithm:</strong> Compare heads. Pick smaller → its next = merge(its next, other list). Base: either list is null → return the other.</div>
+<pre><span class="kw">public class</span> <span class="cls">MergeLists</span> {
+    <span class="kw">public</span> ListNode <span class="fn">mergeTwoLists</span>(ListNode l1, ListNode l2) {
+        <span class="kw">if</span> (l1 == <span class="kw">null</span>) <span class="kw">return</span> l2; <span class="cm">// base cases</span>
+        <span class="kw">if</span> (l2 == <span class="kw">null</span>) <span class="kw">return</span> l1;
+        <span class="kw">if</span> (l1.val &lt;= l2.val) {
+            l1.next = <span class="fn">mergeTwoLists</span>(l1.next, l2);
+            <span class="kw">return</span> l1;
+        } <span class="kw">else</span> {
+            l2.next = <span class="fn">mergeTwoLists</span>(l1, l2.next);
+            <span class="kw">return</span> l2;
+        }
+    }
+}</pre>
+<div class="tree-wrap">
+<svg width="460" height="110" viewBox="0 0 460 110" role="img"><title>Merge two sorted lists call trace</title>
+  <text fill="#94a3b8" font-size="12" x="10" y="16">L1:1→3→5  L2:2→4→6</text>
+  <rect x="10" y="24" width="200" height="22" rx="5" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+  <text fill="#a78bfa" font-size="11" dominant-baseline="central" x="14" y="35">merge(1,2): 1&lt;2 → 1.next=merge(3,2)</text>
+  <rect x="10" y="52" width="200" height="22" rx="5" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+  <text fill="#a78bfa" font-size="11" dominant-baseline="central" x="14" y="63">merge(3,2): 2&lt;3 → 2.next=merge(3,4)</text>
+  <rect x="10" y="80" width="200" height="22" rx="5" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+  <text fill="#a78bfa" font-size="11" dominant-baseline="central" x="14" y="91">merge(3,4): 3&lt;4 → 3.next=merge(5,4)</text>
+  <text fill="#4ade80" font-size="11" x="225" y="60">Result: 1→2→3→4→5→6</text>
+</svg>
+</div>
+<div class="cx"><div class="chip">Time <span>O(m+n)</span></div><div class="chip">Space <span>O(m+n)</span></div></div>
+</div>
+
+<div class="divider"></div>
+<div class="cat-label">Tree recursion</div>
+
+<!-- Q11: Max Depth Binary Tree -->
+<div class="card">
+<div class="card-head"><span class="q-title">11. Max depth of binary tree — LeetCode 104</span><span class="badge easy">Easy</span></div>
+<span class="pattern">tree DFS recursion</span>
+<div class="algo-box"><strong>Algorithm:</strong> Depth = 1 + max(depth(left), depth(right)). Base: null → 0. Each node adds 1 to the deeper subtree depth.</div>
+<pre><span class="kw">public class</span> <span class="cls">MaxDepth</span> {
+    <span class="kw">public int</span> <span class="fn">maxDepth</span>(TreeNode root) {
+        <span class="kw">if</span> (root == <span class="kw">null</span>) <span class="kw">return</span> <span class="num">0</span>; <span class="cm">// base case</span>
+        <span class="ty">int</span> leftDepth  = <span class="fn">maxDepth</span>(root.left);
+        <span class="ty">int</span> rightDepth = <span class="fn">maxDepth</span>(root.right);
+        <span class="kw">return</span> <span class="num">1</span> + Math.max(leftDepth, rightDepth);
+    }
+}</pre>
+<div class="tree-wrap">
+<svg width="460" height="150" viewBox="0 0 460 150" role="img"><title>Max depth binary tree call tree</title>
+  <defs><marker id="td" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#334155" stroke-width="1.5"/></marker></defs>
+  <rect x="195" y="8" width="90" height="26" rx="5" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+  <text fill="#a78bfa" font-size="11" text-anchor="middle" dominant-baseline="central" x="240" y="21">depth(1)</text>
+  <line x1="220" y1="34" x2="130" y2="54" stroke="#334155" stroke-width="0.5" marker-end="url(#td)"/>
+  <line x1="260" y1="34" x2="350" y2="54" stroke="#334155" stroke-width="0.5" marker-end="url(#td)"/>
+  <rect x="80" y="54" width="100" height="26" rx="5" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+  <text fill="#a78bfa" font-size="11" text-anchor="middle" dominant-baseline="central" x="130" y="67">depth(2)=2</text>
+  <rect x="300" y="54" width="100" height="26" rx="5" fill="#0c2d1a" stroke="#059669" stroke-width="0.5"/>
+  <text fill="#4ade80" font-size="11" text-anchor="middle" dominant-baseline="central" x="350" y="67">depth(3)=1</text>
+  <line x1="110" y1="80" x2="60" y2="104" stroke="#334155" stroke-width="0.5" marker-end="url(#td)"/>
+  <line x1="150" y1="80" x2="200" y2="104" stroke="#334155" stroke-width="0.5" marker-end="url(#td)"/>
+  <rect x="20" y="104" width="80" height="26" rx="5" fill="#0c2d1a" stroke="#059669" stroke-width="0.5"/>
+  <text fill="#4ade80" font-size="11" text-anchor="middle" dominant-baseline="central" x="60" y="117">null=0</text>
+  <rect x="160" y="104" width="80" height="26" rx="5" fill="#0c2d1a" stroke="#059669" stroke-width="0.5"/>
+  <text fill="#4ade80" font-size="11" text-anchor="middle" dominant-baseline="central" x="200" y="117">null=0</text>
+  <text fill="#60a5fa" font-size="11" x="10" y="145">1 + max(2,1) = 3</text>
+</svg>
+</div>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(h) stack</span></div></div>
+</div>
+
+<!-- Q12: Same Tree -->
+<div class="card">
+<div class="card-head"><span class="q-title">12. Same tree — LeetCode 100</span><span class="badge easy">Easy</span></div>
+<span class="pattern">tree DFS recursion</span>
+<div class="algo-box"><strong>Algorithm:</strong> Both null → true. One null → false. Values differ → false. Else recurse on left subtrees AND right subtrees.</div>
+<pre><span class="kw">public class</span> <span class="cls">SameTree</span> {
+    <span class="kw">public boolean</span> <span class="fn">isSameTree</span>(TreeNode p, TreeNode q) {
+        <span class="kw">if</span> (p == <span class="kw">null</span> && q == <span class="kw">null</span>) <span class="kw">return true</span>;
+        <span class="kw">if</span> (p == <span class="kw">null</span> || q == <span class="kw">null</span>) <span class="kw">return false</span>;
+        <span class="kw">if</span> (p.val != q.val)           <span class="kw">return false</span>;
+        <span class="kw">return</span> <span class="fn">isSameTree</span>(p.left, q.left) &&
+               <span class="fn">isSameTree</span>(p.right, q.right);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(h)</span></div></div>
+</div>
+
+<!-- Q13: Symmetric Tree -->
+<div class="card">
+<div class="card-head"><span class="q-title">13. Symmetric tree — LeetCode 101</span><span class="badge easy">Easy</span></div>
+<span class="pattern">tree DFS recursion</span>
+<div class="algo-box"><strong>Algorithm:</strong> Check if left subtree is a mirror of right subtree. Mirror: left.val==right.val AND left.left mirrors right.right AND left.right mirrors right.left.</div>
+<pre><span class="kw">public class</span> <span class="cls">SymmetricTree</span> {
+    <span class="kw">public boolean</span> <span class="fn">isSymmetric</span>(TreeNode root) {
+        <span class="kw">return</span> <span class="fn">isMirror</span>(root.left, root.right);
+    }
+
+    <span class="kw">private boolean</span> <span class="fn">isMirror</span>(TreeNode l, TreeNode r) {
+        <span class="kw">if</span> (l == <span class="kw">null</span> && r == <span class="kw">null</span>) <span class="kw">return true</span>;
+        <span class="kw">if</span> (l == <span class="kw">null</span> || r == <span class="kw">null</span>) <span class="kw">return false</span>;
+        <span class="kw">return</span> (l.val == r.val)
+            && <span class="fn">isMirror</span>(l.left, r.right)
+            && <span class="fn">isMirror</span>(l.right, r.left);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(h)</span></div></div>
+</div>
+
+<!-- Q14: Path Sum -->
+<div class="card">
+<div class="card-head"><span class="q-title">14. Path sum — LeetCode 112</span><span class="badge easy">Easy</span></div>
+<span class="pattern">tree DFS recursion</span>
+<div class="algo-box"><strong>Algorithm:</strong> Subtract node value from target. At leaf (no children): check if remaining==0. At non-leaf: recurse left or right.</div>
+<pre><span class="kw">public class</span> <span class="cls">PathSum</span> {
+    <span class="kw">public boolean</span> <span class="fn">hasPathSum</span>(TreeNode root, <span class="ty">int</span> target) {
+        <span class="kw">if</span> (root == <span class="kw">null</span>) <span class="kw">return false</span>;
+        target -= root.val;
+        <span class="cm">// leaf check</span>
+        <span class="kw">if</span> (root.left == <span class="kw">null</span> && root.right == <span class="kw">null</span>)
+            <span class="kw">return</span> target == <span class="num">0</span>;
+        <span class="kw">return</span> <span class="fn">hasPathSum</span>(root.left, target) ||
+               <span class="fn">hasPathSum</span>(root.right, target);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(h)</span></div></div>
+</div>
+
+<!-- Q15: Invert Binary Tree -->
+<div class="card">
+<div class="card-head"><span class="q-title">15. Invert binary tree — LeetCode 226</span><span class="badge easy">Easy</span></div>
+<span class="pattern">tree DFS recursion</span>
+<div class="algo-box"><strong>Algorithm:</strong> Swap left and right children. Recurse on both. Base: null → return null.</div>
+<pre><span class="kw">public class</span> <span class="cls">InvertTree</span> {
+    <span class="kw">public</span> TreeNode <span class="fn">invertTree</span>(TreeNode root) {
+        <span class="kw">if</span> (root == <span class="kw">null</span>) <span class="kw">return null</span>;
+        TreeNode tmp  = root.left;
+        root.left     = root.right;
+        root.right    = tmp;
+        <span class="fn">invertTree</span>(root.left);
+        <span class="fn">invertTree</span>(root.right);
+        <span class="kw">return</span> root;
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(h)</span></div></div>
+</div>
+
+<div class="divider"></div>
+<div class="cat-label">Tree traversals</div>
+
+<!-- Q16: Preorder, Inorder, Postorder -->
+<div class="card">
+<div class="card-head"><span class="q-title">16. Binary tree traversals — LeetCode 144/94/145</span><span class="badge easy">Easy</span></div>
+<span class="pattern">tree DFS traversal</span>
+<div class="algo-box"><strong>Algorithm:</strong> Pre: root→left→right. In: left→root→right. Post: left→right→root. Each is just reordering the three recursive calls.</div>
+<pre><span class="kw">public class</span> <span class="cls">Traversals</span> {
+    List&lt;Integer&gt; res = <span class="kw">new</span> ArrayList&lt;&gt;();
+
+    <span class="kw">void</span> <span class="fn">preorder</span>(TreeNode n) {
+        <span class="kw">if</span>(n==<span class="kw">null</span>) <span class="kw">return</span>;
+        res.add(n.val);        <span class="cm">// ROOT first</span>
+        <span class="fn">preorder</span>(n.left);
+        <span class="fn">preorder</span>(n.right);
+    }
+
+    <span class="kw">void</span> <span class="fn">inorder</span>(TreeNode n) {
+        <span class="kw">if</span>(n==<span class="kw">null</span>) <span class="kw">return</span>;
+        <span class="fn">inorder</span>(n.left);
+        res.add(n.val);        <span class="cm">// ROOT middle</span>
+        <span class="fn">inorder</span>(n.right);
+    }
+
+    <span class="kw">void</span> <span class="fn">postorder</span>(TreeNode n) {
+        <span class="kw">if</span>(n==<span class="kw">null</span>) <span class="kw">return</span>;
+        <span class="fn">postorder</span>(n.left);
+        <span class="fn">postorder</span>(n.right);
+        res.add(n.val);        <span class="cm">// ROOT last</span>
+    }
+}</pre>
+<div class="tree-wrap">
+<svg width="460" height="130" viewBox="0 0 460 130" role="img"><title>Binary tree traversal orders diagram</title>
+  <rect x="195" y="8" width="70" height="24" rx="5" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+  <text fill="#a78bfa" font-size="11" text-anchor="middle" dominant-baseline="central" x="230" y="20">1</text>
+  <line x1="215" y1="32" x2="140" y2="52" stroke="#334155" stroke-width="0.5"/>
+  <line x1="245" y1="32" x2="320" y2="52" stroke="#334155" stroke-width="0.5"/>
+  <rect x="100" y="52" width="70" height="24" rx="5" fill="#0c2040" stroke="#0369a1" stroke-width="0.5"/>
+  <text fill="#60a5fa" font-size="11" text-anchor="middle" dominant-baseline="central" x="135" y="64">2</text>
+  <rect x="285" y="52" width="70" height="24" rx="5" fill="#0c2040" stroke="#0369a1" stroke-width="0.5"/>
+  <text fill="#60a5fa" font-size="11" text-anchor="middle" dominant-baseline="central" x="320" y="64">3</text>
+  <line x1="120" y1="76" x2="70" y2="98" stroke="#334155" stroke-width="0.5"/>
+  <line x1="150" y1="76" x2="200" y2="98" stroke="#334155" stroke-width="0.5"/>
+  <rect x="40" y="98" width="60" height="24" rx="5" fill="#0c2d1a" stroke="#059669" stroke-width="0.5"/>
+  <text fill="#4ade80" font-size="11" text-anchor="middle" dominant-baseline="central" x="70" y="110">4</text>
+  <rect x="170" y="98" width="60" height="24" rx="5" fill="#0c2d1a" stroke="#059669" stroke-width="0.5"/>
+  <text fill="#4ade80" font-size="11" text-anchor="middle" dominant-baseline="central" x="200" y="110">5</text>
+  <text fill="#94a3b8" font-size="11" x="375" y="30">Pre:  1,2,4,5,3</text>
+  <text fill="#94a3b8" font-size="11" x="375" y="50">In:   4,2,5,1,3</text>
+  <text fill="#94a3b8" font-size="11" x="375" y="70">Post: 4,5,2,3,1</text>
+</svg>
+</div>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(h)</span></div></div>
+</div>
+
+<div class="divider"></div>
+<div class="cat-label">Backtracking (easy level)</div>
+
+<!-- Q17: Subsets -->
+<div class="card">
+<div class="card-head"><span class="q-title">17. Subsets — LeetCode 78</span><span class="badge easy">Easy</span></div>
+<span class="pattern">backtracking / include-exclude</span>
+<div class="algo-box"><strong>Algorithm:</strong> At each index, make two choices: include nums[i] in current subset OR skip it. Recurse on next index. When index==n, add current subset to result.</div>
+<pre><span class="kw">public class</span> <span class="cls">Subsets</span> {
+    List&lt;List&lt;Integer&gt;&gt; res = <span class="kw">new</span> ArrayList&lt;&gt;();
+
+    <span class="kw">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="fn">subsets</span>(<span class="ty">int</span>[] nums) {
+        <span class="fn">backtrack</span>(nums, <span class="num">0</span>, <span class="kw">new</span> ArrayList&lt;&gt;());
+        <span class="kw">return</span> res;
+    }
+
+    <span class="kw">void</span> <span class="fn">backtrack</span>(<span class="ty">int</span>[] nums, <span class="ty">int</span> idx, List&lt;Integer&gt; cur) {
+        res.add(<span class="kw">new</span> ArrayList&lt;&gt;(cur)); <span class="cm">// add snapshot</span>
+        <span class="kw">for</span> (<span class="ty">int</span> i = idx; i &lt; nums.length; i++) {
+            cur.add(nums[i]);           <span class="cm">// include</span>
+            <span class="fn">backtrack</span>(nums, i + <span class="num">1</span>, cur);
+            cur.remove(cur.size() - <span class="num">1</span>); <span class="cm">// undo</span>
+        }
+    }
+}</pre>
+<div class="tree-wrap">
+<svg width="460" height="140" viewBox="0 0 460 140" role="img"><title>Subsets backtracking call tree for [1,2]</title>
+  <rect x="175" y="8" width="110" height="24" rx="5" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+  <text fill="#a78bfa" font-size="11" text-anchor="middle" dominant-baseline="central" x="230" y="20">bt(idx=0, [])</text>
+  <line x1="200" y1="32" x2="100" y2="56" stroke="#334155" stroke-width="0.5"/>
+  <line x1="260" y1="32" x2="360" y2="56" stroke="#334155" stroke-width="0.5"/>
+  <text fill="#64748b" font-size="10" x="110" y="50">+1</text>
+  <text fill="#64748b" font-size="10" x="350" y="50">+2</text>
+  <rect x="50" y="56" width="110" height="24" rx="5" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+  <text fill="#a78bfa" font-size="11" text-anchor="middle" dominant-baseline="central" x="105" y="68">bt(idx=1, [1])</text>
+  <rect x="300" y="56" width="110" height="24" rx="5" fill="#0c2d1a" stroke="#059669" stroke-width="0.5"/>
+  <text fill="#4ade80" font-size="11" text-anchor="middle" dominant-baseline="central" x="355" y="68">bt(idx=2, [2])</text>
+  <line x1="80" y1="80" x2="50" y2="106" stroke="#334155" stroke-width="0.5"/>
+  <line x1="130" y1="80" x2="175" y2="106" stroke="#334155" stroke-width="0.5"/>
+  <text fill="#64748b" font-size="10" x="30" y="100">+2</text>
+  <rect x="10" y="106" width="80" height="24" rx="5" fill="#0c2d1a" stroke="#059669" stroke-width="0.5"/>
+  <text fill="#4ade80" font-size="11" text-anchor="middle" dominant-baseline="central" x="50" y="118">[] → [1,2]</text>
+  <rect x="145" y="106" width="80" height="24" rx="5" fill="#0c2d1a" stroke="#059669" stroke-width="0.5"/>
+  <text fill="#4ade80" font-size="11" text-anchor="middle" dominant-baseline="central" x="185" y="118">[1] done</text>
+  <text fill="#94a3b8" font-size="11" x="280" y="110">Results: [],[1],[1,2],[2]</text>
+  <text fill="#64748b" font-size="11" x="280" y="128">2^n subsets total</text>
+</svg>
+</div>
+<div class="cx"><div class="chip">Time <span>O(2^n)</span></div><div class="chip">Space <span>O(n)</span></div></div>
+</div>
+
+<!-- Q18: Permutations -->
+<div class="card">
+<div class="card-head"><span class="q-title">18. Permutations — LeetCode 46</span><span class="badge easy">Easy</span></div>
+<span class="pattern">backtracking</span>
+<div class="algo-box"><strong>Algorithm:</strong> For each unused number, add it to current, mark used, recurse. When current size equals n, add to result. Undo: remove last, unmark.</div>
+<pre><span class="kw">public class</span> <span class="cls">Permutations</span> {
+    List&lt;List&lt;Integer&gt;&gt; res = <span class="kw">new</span> ArrayList&lt;&gt;();
+    <span class="ty">boolean</span>[] used;
+
+    <span class="kw">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="fn">permute</span>(<span class="ty">int</span>[] nums) {
+        used = <span class="kw">new</span> <span class="ty">boolean</span>[nums.length];
+        <span class="fn">backtrack</span>(nums, <span class="kw">new</span> ArrayList&lt;&gt;());
+        <span class="kw">return</span> res;
+    }
+
+    <span class="kw">void</span> <span class="fn">backtrack</span>(<span class="ty">int</span>[] nums, List&lt;Integer&gt; cur) {
+        <span class="kw">if</span> (cur.size() == nums.length) {
+            res.add(<span class="kw">new</span> ArrayList&lt;&gt;(cur)); <span class="kw">return</span>;
+        }
+        <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; nums.length; i++) {
+            <span class="kw">if</span> (used[i]) <span class="kw">continue</span>;
+            used[i] = <span class="kw">true</span>;
+            cur.add(nums[i]);
+            <span class="fn">backtrack</span>(nums, cur);
+            cur.remove(cur.size() - <span class="num">1</span>);
+            used[i] = <span class="kw">false</span>;
+        }
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n! × n)</span></div><div class="chip">Space <span>O(n)</span></div></div>
+</div>
+
+<div class="divider"></div>
+<div class="cat-label">More essential patterns</div>
+
+<!-- Q19: Climbing Stairs -->
+<div class="card">
+<div class="card-head"><span class="q-title">19. Climbing stairs — LeetCode 70</span><span class="badge easy">Easy</span></div>
+<span class="pattern">recursion + memoization</span>
+<div class="algo-box"><strong>Algorithm:</strong> From stair n, you came from n-1 or n-2. So ways(n) = ways(n-1) + ways(n-2). Exactly Fibonacci. Base: ways(0)=1, ways(1)=1.</div>
+<pre><span class="kw">public class</span> <span class="cls">ClimbStairs</span> {
+    <span class="ty">int</span>[] memo;
+    <span class="kw">public int</span> <span class="fn">climbStairs</span>(<span class="ty">int</span> n) {
+        memo = <span class="kw">new</span> <span class="ty">int</span>[n + <span class="num">1</span>];
+        Arrays.fill(memo, -<span class="num">1</span>);
+        <span class="kw">return</span> <span class="fn">ways</span>(n);
+    }
+    <span class="kw">int</span> <span class="fn">ways</span>(<span class="ty">int</span> n) {
+        <span class="kw">if</span> (n &lt;= <span class="num">1</span>) <span class="kw">return</span> <span class="num">1</span>;
+        <span class="kw">if</span> (memo[n] != -<span class="num">1</span>) <span class="kw">return</span> memo[n];
+        <span class="kw">return</span> memo[n] = <span class="fn">ways</span>(n-<span class="num">1</span>) + <span class="fn">ways</span>(n-<span class="num">2</span>);
+    }
+}</pre>
+<div class="tree-wrap">
+<svg width="440" height="100" viewBox="0 0 440 100" role="img"><title>Climbing stairs call tree for n=4</title>
+  <rect x="175" y="8" width="90" height="24" rx="5" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+  <text fill="#a78bfa" font-size="11" text-anchor="middle" dominant-baseline="central" x="220" y="20">ways(4)</text>
+  <line x1="200" y1="32" x2="130" y2="52" stroke="#334155" stroke-width="0.5"/>
+  <line x1="240" y1="32" x2="310" y2="52" stroke="#334155" stroke-width="0.5"/>
+  <text fill="#64748b" font-size="10" x="140" y="48">1-step</text>
+  <text fill="#64748b" font-size="10" x="295" y="48">2-step</text>
+  <rect x="80" y="52" width="90" height="24" rx="5" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+  <text fill="#a78bfa" font-size="11" text-anchor="middle" dominant-baseline="central" x="125" y="64">ways(3)=3</text>
+  <rect x="265" y="52" width="90" height="24" rx="5" fill="#0c2d1a" stroke="#059669" stroke-width="0.5"/>
+  <text fill="#4ade80" font-size="11" text-anchor="middle" dominant-baseline="central" x="310" y="64">ways(2)=2</text>
+  <text fill="#38bdf8" font-size="12" font-weight="500" x="10" y="96">ways(4) = 3+2 = 5 ways</text>
+</svg>
+</div>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(n)</span></div></div>
+</div>
+
+<!-- Q20: Count nodes -->
+<div class="card">
+<div class="card-head"><span class="q-title">20. Count nodes in binary tree — LeetCode 222</span><span class="badge easy">Easy</span></div>
+<span class="pattern">tree recursion</span>
+<div class="algo-box"><strong>Algorithm:</strong> Total nodes = 1 (root) + count(left) + count(right). Base: null → 0.</div>
+<pre><span class="kw">public class</span> <span class="cls">CountNodes</span> {
+    <span class="kw">public int</span> <span class="fn">countNodes</span>(TreeNode root) {
+        <span class="kw">if</span> (root == <span class="kw">null</span>) <span class="kw">return</span> <span class="num">0</span>;
+        <span class="kw">return</span> <span class="num">1</span> + <span class="fn">countNodes</span>(root.left)
+                 + <span class="fn">countNodes</span>(root.right);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(h)</span></div></div>
+</div>
+
+<!-- Q21: Balanced Binary Tree -->
+<div class="card">
+<div class="card-head"><span class="q-title">21. Balanced binary tree — LeetCode 110</span><span class="badge easy">Easy</span></div>
+<span class="pattern">tree DFS recursion</span>
+<div class="algo-box"><strong>Algorithm:</strong> For each node, get heights of left and right subtrees. If |left-right| > 1 → not balanced. Recurse both sides. Return -1 as sentinel for unbalanced.</div>
+<pre><span class="kw">public class</span> <span class="cls">BalancedTree</span> {
+    <span class="kw">public boolean</span> <span class="fn">isBalanced</span>(TreeNode root) {
+        <span class="kw">return</span> <span class="fn">height</span>(root) != -<span class="num">1</span>;
+    }
+    <span class="kw">int</span> <span class="fn">height</span>(TreeNode node) {
+        <span class="kw">if</span> (node == <span class="kw">null</span>) <span class="kw">return</span> <span class="num">0</span>;
+        <span class="ty">int</span> lh = <span class="fn">height</span>(node.left);
+        <span class="kw">if</span> (lh == -<span class="num">1</span>) <span class="kw">return</span> -<span class="num">1</span>; <span class="cm">// propagate unbalanced</span>
+        <span class="ty">int</span> rh = <span class="fn">height</span>(node.right);
+        <span class="kw">if</span> (rh == -<span class="num">1</span>) <span class="kw">return</span> -<span class="num">1</span>;
+        <span class="kw">if</span> (Math.abs(lh - rh) &gt; <span class="num">1</span>) <span class="kw">return</span> -<span class="num">1</span>;
+        <span class="kw">return</span> <span class="num">1</span> + Math.max(lh, rh);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(h)</span></div></div>
+</div>
+
+<!-- Q22: Diameter of Binary Tree -->
+<div class="card">
+<div class="card-head"><span class="q-title">22. Diameter of binary tree — LeetCode 543</span><span class="badge easy">Easy</span></div>
+<span class="pattern">tree DFS recursion</span>
+<div class="algo-box"><strong>Algorithm:</strong> Diameter through a node = leftHeight + rightHeight. Track global max. Return 1+max(lh,rh) as height up to parent.</div>
+<pre><span class="kw">public class</span> <span class="cls">DiameterTree</span> {
+    <span class="ty">int</span> maxDia = <span class="num">0</span>;
+    <span class="kw">public int</span> <span class="fn">diameterOfBinaryTree</span>(TreeNode root) {
+        <span class="fn">depth</span>(root);
+        <span class="kw">return</span> maxDia;
+    }
+    <span class="kw">int</span> <span class="fn">depth</span>(TreeNode node) {
+        <span class="kw">if</span> (node == <span class="kw">null</span>) <span class="kw">return</span> <span class="num">0</span>;
+        <span class="ty">int</span> lh = <span class="fn">depth</span>(node.left);
+        <span class="ty">int</span> rh = <span class="fn">depth</span>(node.right);
+        maxDia = Math.max(maxDia, lh + rh); <span class="cm">// path through node</span>
+        <span class="kw">return</span> <span class="num">1</span> + Math.max(lh, rh);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(h)</span></div></div>
+</div>
+
+<!-- Q23: Merge Binary Trees -->
+<div class="card">
+<div class="card-head"><span class="q-title">23. Merge two binary trees — LeetCode 617</span><span class="badge easy">Easy</span></div>
+<span class="pattern">tree DFS recursion</span>
+<div class="algo-box"><strong>Algorithm:</strong> If one node is null, return the other. Else add values, recurse on both left and right children.</div>
+<pre><span class="kw">public class</span> <span class="cls">MergeTrees</span> {
+    <span class="kw">public</span> TreeNode <span class="fn">mergeTrees</span>(TreeNode r1, TreeNode r2) {
+        <span class="kw">if</span> (r1 == <span class="kw">null</span>) <span class="kw">return</span> r2;
+        <span class="kw">if</span> (r2 == <span class="kw">null</span>) <span class="kw">return</span> r1;
+        r1.val += r2.val; <span class="cm">// merge values</span>
+        r1.left  = <span class="fn">mergeTrees</span>(r1.left,  r2.left);
+        r1.right = <span class="fn">mergeTrees</span>(r1.right, r2.right);
+        <span class="kw">return</span> r1;
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(min(m,n))</span></div><div class="chip">Space <span>O(min(h1,h2))</span></div></div>
+</div>
+
+<div class="divider"></div>
+<div class="cat-label">Number / math recursion</div>
+
+<!-- Q24: GCD -->
+<div class="card">
+<div class="card-head"><span class="q-title">24. GCD — Euclidean algorithm</span><span class="badge easy">Easy</span></div>
+<span class="pattern">math recursion</span>
+<div class="algo-box"><strong>Algorithm:</strong> gcd(a, b) = gcd(b, a%b). Base: b==0 → return a. Each call reduces the problem significantly.</div>
+<pre><span class="kw">public class</span> <span class="cls">GCD</span> {
+    <span class="kw">public int</span> <span class="fn">gcd</span>(<span class="ty">int</span> a, <span class="ty">int</span> b) {
+        <span class="kw">if</span> (b == <span class="num">0</span>) <span class="kw">return</span> a; <span class="cm">// base case</span>
+        <span class="kw">return</span> <span class="fn">gcd</span>(b, a % b);
+    }
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        System.out.println(<span class="kw">new</span> <span class="cls">GCD</span>().<span class="fn">gcd</span>(<span class="num">48</span>, <span class="num">18</span>)); <span class="cm">// 6</span>
+    }
+}</pre>
+<div class="tree-wrap">
+<svg width="440" height="80" viewBox="0 0 440 80" role="img"><title>GCD Euclidean call chain for 48 and 18</title>
+  <rect x="10" y="12" width="95" height="22" rx="5" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+  <text fill="#a78bfa" font-size="11" text-anchor="middle" dominant-baseline="central" x="57" y="23">gcd(48,18)</text>
+  <line x1="105" y1="23" x2="120" y2="23" stroke="#334155" stroke-width="0.5" marker-end="url(#ta)"/>
+  <rect x="120" y="12" width="95" height="22" rx="5" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+  <text fill="#a78bfa" font-size="11" text-anchor="middle" dominant-baseline="central" x="167" y="23">gcd(18,12)</text>
+  <line x1="215" y1="23" x2="230" y2="23" stroke="#334155" stroke-width="0.5" marker-end="url(#ta)"/>
+  <rect x="230" y="12" width="90" height="22" rx="5" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+  <text fill="#a78bfa" font-size="11" text-anchor="middle" dominant-baseline="central" x="275" y="23">gcd(12,6)</text>
+  <line x1="320" y1="23" x2="335" y2="23" stroke="#334155" stroke-width="0.5" marker-end="url(#ta)"/>
+  <rect x="335" y="12" width="90" height="22" rx="5" fill="#0c2d1a" stroke="#059669" stroke-width="0.5"/>
+  <text fill="#4ade80" font-size="11" text-anchor="middle" dominant-baseline="central" x="380" y="23">gcd(6,0)=6</text>
+  <text fill="#4ade80" font-size="11" x="10" y="62">gcd(48,18) = 6</text>
+  <text fill="#64748b" font-size="11" x="130" y="62">b=0 is the base case</text>
+</svg>
+</div>
+<div class="cx"><div class="chip">Time <span>O(log min(a,b))</span></div><div class="chip">Space <span>O(log min(a,b))</span></div></div>
+</div>
+
+<!-- Q25: Is Power of Two -->
+<div class="card">
+<div class="card-head"><span class="q-title">25. Power of two — LeetCode 231</span><span class="badge easy">Easy</span></div>
+<span class="pattern">math recursion</span>
+<div class="algo-box"><strong>Algorithm:</strong> If n==1 → true. If n%2!=0 → false. Else recurse on n/2.</div>
+<pre><span class="kw">public class</span> <span class="cls">PowerOfTwo</span> {
+    <span class="kw">public boolean</span> <span class="fn">isPowerOfTwo</span>(<span class="ty">int</span> n) {
+        <span class="kw">if</span> (n &lt;= <span class="num">0</span>)      <span class="kw">return false</span>;
+        <span class="kw">if</span> (n == <span class="num">1</span>)      <span class="kw">return true</span>;  <span class="cm">// base</span>
+        <span class="kw">if</span> (n % <span class="num">2</span> != <span class="num">0</span>) <span class="kw">return false</span>; <span class="cm">// odd can't be power of 2</span>
+        <span class="kw">return</span> <span class="fn">isPowerOfTwo</span>(n / <span class="num">2</span>);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(log n)</span></div><div class="chip">Space <span>O(log n)</span></div></div>
+</div>
+
+<!-- Q26: Happy Number -->
+<div class="card">
+<div class="card-head"><span class="q-title">26. Happy number — LeetCode 202</span><span class="badge easy">Easy</span></div>
+<span class="pattern">recursion + set (cycle detection)</span>
+<div class="algo-box"><strong>Algorithm:</strong> Sum of squares of digits. If result==1 → happy. If seen before → cycle → not happy. Else recurse on new sum.</div>
+<pre><span class="kw">public class</span> <span class="cls">HappyNumber</span> {
+    Set&lt;Integer&gt; seen = <span class="kw">new</span> HashSet&lt;&gt;();
+
+    <span class="kw">public boolean</span> <span class="fn">isHappy</span>(<span class="ty">int</span> n) {
+        <span class="kw">if</span> (n == <span class="num">1</span>)         <span class="kw">return true</span>;
+        <span class="kw">if</span> (seen.contains(n)) <span class="kw">return false</span>; <span class="cm">// cycle</span>
+        seen.add(n);
+        <span class="ty">int</span> next = <span class="num">0</span>;
+        <span class="kw">while</span> (n > <span class="num">0</span>) {
+            <span class="ty">int</span> d = n % <span class="num">10</span>;
+            next += d * d;
+            n /= <span class="num">10</span>;
+        }
+        <span class="kw">return</span> <span class="fn">isHappy</span>(next);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(log n)</span></div><div class="chip">Space <span>O(log n)</span></div></div>
+</div>
+
+<div class="divider"></div>
+<div class="cat-label">String recursion</div>
+
+<!-- Q27: Remove duplicates (recursive) -->
+<div class="card">
+<div class="card-head"><span class="q-title">27. Remove all adjacent duplicates — LeetCode 1047</span><span class="badge easy">Easy</span></div>
+<span class="pattern">recursion with stack-like thinking</span>
+<div class="algo-box"><strong>Algorithm:</strong> Build result using a char array (stack). Scan each char: if top of stack equals current char, pop (remove adjacent pair). Else push. O(n) one pass.</div>
+<pre><span class="kw">public class</span> <span class="cls">RemoveDuplicates</span> {
+    <span class="kw">public</span> String <span class="fn">removeDuplicates</span>(String s) {
+        <span class="ty">char</span>[] stack = <span class="kw">new</span> <span class="ty">char</span>[s.length()];
+        <span class="ty">int</span> top = -<span class="num">1</span>;
+        <span class="kw">for</span> (<span class="ty">char</span> c : s.toCharArray()) {
+            <span class="kw">if</span> (top &gt;= <span class="num">0</span> && stack[top] == c)
+                top--;        <span class="cm">// pop (remove pair)</span>
+            <span class="kw">else</span>
+                stack[++top] = c; <span class="cm">// push</span>
+        }
+        <span class="kw">return new</span> String(stack, <span class="num">0</span>, top + <span class="num">1</span>);
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(n)</span></div></div>
+</div>
+
+<!-- Q28: Reverse words -->
+<div class="card">
+<div class="card-head"><span class="q-title">28. Reverse words in a string (recursive)</span><span class="badge easy">Easy</span></div>
+<span class="pattern">string recursion</span>
+<div class="algo-box"><strong>Algorithm:</strong> Find first word, recurse on rest of string. Append current word after result of recursion → words reversed.</div>
+<pre><span class="kw">public class</span> <span class="cls">ReverseWords</span> {
+    <span class="kw">public</span> String <span class="fn">reverseWords</span>(String s) {
+        String[] words = s.trim().split(<span class="str">"\\s+"</span>);
+        <span class="kw">return</span> <span class="fn">rev</span>(words, <span class="num">0</span>);
+    }
+
+    <span class="kw">private</span> String <span class="fn">rev</span>(String[] w, <span class="ty">int</span> i) {
+        <span class="kw">if</span> (i == w.length - <span class="num">1</span>) <span class="kw">return</span> w[i]; <span class="cm">// base</span>
+        <span class="kw">return</span> <span class="fn">rev</span>(w, i + <span class="num">1</span>) + <span class="str">" "</span> + w[i];
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(n)</span></div><div class="chip">Space <span>O(n)</span></div></div>
+</div>
+
+<div class="divider"></div>
+<div class="cat-label">BST recursion</div>
+
+<!-- Q29: Search in BST -->
+<div class="card">
+<div class="card-head"><span class="q-title">29. Search in a BST — LeetCode 700</span><span class="badge easy">Easy</span></div>
+<span class="pattern">BST recursion</span>
+<div class="algo-box"><strong>Algorithm:</strong> If val==root → return root. If val < root.val → go left. Else go right. Base: null → not found.</div>
+<pre><span class="kw">public class</span> <span class="cls">SearchBST</span> {
+    <span class="kw">public</span> TreeNode <span class="fn">searchBST</span>(TreeNode root, <span class="ty">int</span> val) {
+        <span class="kw">if</span> (root == <span class="kw">null</span>)      <span class="kw">return null</span>; <span class="cm">// not found</span>
+        <span class="kw">if</span> (root.val == val)   <span class="kw">return</span> root; <span class="cm">// found</span>
+        <span class="kw">if</span> (val &lt; root.val)
+            <span class="kw">return</span> <span class="fn">searchBST</span>(root.left, val);
+        <span class="kw">return</span> <span class="fn">searchBST</span>(root.right, val);
+    }
+}</pre>
+<div class="tree-wrap">
+<svg width="440" height="120" viewBox="0 0 440 120" role="img"><title>BST search for value 4 call trace</title>
+  <rect x="175" y="8" width="90" height="24" rx="5" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+  <text fill="#a78bfa" font-size="11" text-anchor="middle" dominant-baseline="central" x="220" y="20">search(5,4)</text>
+  <line x1="200" y1="32" x2="130" y2="54" stroke="#4ade80" stroke-width="0.5" marker-end="url(#td)"/>
+  <text fill="#4ade80" font-size="10" x="142" y="48">4&lt;5 go left</text>
+  <rect x="80" y="54" width="100" height="24" rx="5" fill="#1e1040" stroke="#7c3aed" stroke-width="0.5"/>
+  <text fill="#a78bfa" font-size="11" text-anchor="middle" dominant-baseline="central" x="130" y="66">search(3,4)</text>
+  <line x1="160" y1="78" x2="220" y2="98" stroke="#4ade80" stroke-width="0.5" marker-end="url(#td)"/>
+  <text fill="#4ade80" font-size="10" x="162" y="92">4&gt;3 go right</text>
+  <rect x="175" y="98" width="110" height="24" rx="5" fill="#0c2d1a" stroke="#059669" stroke-width="0.5"/>
+  <text fill="#4ade80" font-size="11" text-anchor="middle" dominant-baseline="central" x="230" y="110">search(4,4)=found</text>
+</svg>
+</div>
+<div class="cx"><div class="chip">Time <span>O(h)</span></div><div class="chip">Space <span>O(h)</span></div></div>
+</div>
+
+<!-- Q30: Insert into BST -->
+<div class="card">
+<div class="card-head"><span class="q-title">30. Insert into a BST — LeetCode 701</span><span class="badge easy">Easy</span></div>
+<span class="pattern">BST recursion</span>
+<div class="algo-box"><strong>Algorithm:</strong> If null → create new node here. If val < root → insert into left subtree. Else insert into right subtree. BST property maintained automatically.</div>
+<pre><span class="kw">public class</span> <span class="cls">InsertBST</span> {
+    <span class="kw">public</span> TreeNode <span class="fn">insertIntoBST</span>(TreeNode root, <span class="ty">int</span> val) {
+        <span class="kw">if</span> (root == <span class="kw">null</span>)
+            <span class="kw">return new</span> TreeNode(val); <span class="cm">// insert here</span>
+        <span class="kw">if</span> (val &lt; root.val)
+            root.left  = <span class="fn">insertIntoBST</span>(root.left, val);
+        <span class="kw">else</span>
+            root.right = <span class="fn">insertIntoBST</span>(root.right, val);
+        <span class="kw">return</span> root;
+    }
+}</pre>
+<div class="cx"><div class="chip">Time <span>O(h)</span></div><div class="chip">Space <span>O(h)</span></div></div>
+</div>
+
+</div>
